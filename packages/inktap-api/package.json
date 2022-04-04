@@ -1,0 +1,27 @@
+{
+  "name": "inktap-api",
+  "version": "0.1.0",
+  "description": "inktap-api",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Phillip Luther <dev@phillipluther.com>",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "dayjs": "^1.11.0",
+    "express": "^4.17.3",
+    "nanoid": "^3.3.2",
+    "slugify": "^1.6.5"
+  },
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.2",
+    "@types/express": "^4.17.13",
+    "ts-node-dev": "^1.1.8",
+    "tsconfig-paths": "^3.14.1",
+    "typescript": "^4.6.3"
+  }
+}
