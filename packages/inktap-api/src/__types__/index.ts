@@ -1,1 +1,1 @@
-export * from './post.types';
+export { Post } from '../resources/posts/post.model';

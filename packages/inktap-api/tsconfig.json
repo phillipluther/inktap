@@ -6,7 +6,8 @@
     "baseUrl": ".",
     "paths": {
       "__types__": ["./src/__types__"],
-      "__constants__": ["./src/constants"]
+      "__constants__": ["./src/constants"],
+      "__utils__": ["./src/utils"]
     }
   }
 }
