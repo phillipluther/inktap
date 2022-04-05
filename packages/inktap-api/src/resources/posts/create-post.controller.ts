@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import { nanoid } from 'nanoid';
 import path from 'path';
-import slugify from 'slugify';
 import dayjs from 'dayjs';
+import { writeFile, mkdir } from 'fs/promises';
+import matter from 'gray-matter';
 import { Post as P } from '__types__';
 import { CONTENT_DIR } from '__constants__';
-import { formatSchemaError } from '__utils__';
+import { createSlug, formatSchemaError } from '__utils__';
 import { Post } from './post.model';
-import { writeFile, mkdir } from 'fs/promises';
 
 export default async function (req: Request, res: Response): Promise<Response> {
   try {
@@ -20,7 +20,7 @@ export default async function (req: Request, res: Response): Promise<Response> {
       ...postData,
       id,
       published,
-      slug: postData.slug || slugify(postData.title || '', { lower: true }),
+      slug: postData.slug || createSlug(postData.title || ''),
     };
 
     const validation = Post.safeParse(post);
@@ -34,10 +34,12 @@ export default async function (req: Request, res: Response): Promise<Response> {
     }
 
     const postDir = path.join(CONTENT_DIR, `${timeHash}-${post.slug}`);
-    const postFilepath = path.join(postDir, `${id}.json`); // TODO: this'll ultimately be .md
+    const postFilepath = path.join(postDir, `${id}.md`);
 
     await mkdir(postDir, { recursive: true });
-    await writeFile(postFilepath, JSON.stringify(post));
+
+    const { markdown, ...frontmatter } = post;
+    await writeFile(postFilepath, matter.stringify(markdown, frontmatter));
 
     return res.status(201).json(post);
   } catch (err) {

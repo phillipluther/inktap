@@ -4,7 +4,7 @@ export const Post = z.object({
   id: z.string(),
   published: z.date(),
   updated: z.array(z.date()).optional(),
-  title: z.number(),
+  title: z.string(),
   markdown: z.string(),
   markup: z.string().optional(),
   summary: z.string().optional(),
