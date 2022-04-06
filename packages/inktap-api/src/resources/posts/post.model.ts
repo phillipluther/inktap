@@ -16,4 +16,4 @@ const Post = z.object({
 });
 
 export default Post;
-export type Post = z.infer<typeof Post>;
+export type PostType = z.infer<typeof Post>;

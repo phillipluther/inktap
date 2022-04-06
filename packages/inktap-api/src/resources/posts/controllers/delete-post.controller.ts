@@ -1,5 +1,8 @@
+import path from 'path';
 import { Request, Response } from 'express';
+import { rm } from 'fs/promises';
 import getPostById from '../utils/get-post-by-id';
+import { POSTS_DIR } from '__constants__';
 
 export default async function (req: Request, res: Response): Promise<Response> {
   try {
@@ -12,15 +15,16 @@ export default async function (req: Request, res: Response): Promise<Response> {
       });
     }
 
+    await rm(path.join(POSTS_DIR, `${req.params.id}.md`));
     return res.status(200).json({
       success: true,
       data: post,
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).send({
+    return res.status(500).json({
       success: false,
-      data: 'Internal error getting post',
+      data: 'Internal error getting all posts',
     });
   }
 }

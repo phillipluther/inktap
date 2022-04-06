@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
 import getPostById from '../utils/get-post-by-id';
+import Post from '../post.model';
+import { Post as P } from '__types__';
+import { formatSchemaError, postToFile } from '__utils__';
 
 export default async function (req: Request, res: Response): Promise<Response> {
   try {
@@ -12,15 +15,31 @@ export default async function (req: Request, res: Response): Promise<Response> {
       });
     }
 
+    const updatedPost = {
+      ...post,
+      ...req.body,
+    } as P;
+
+    const validation = Post.safeParse(updatedPost);
+
+    if (!validation.success) {
+      return res.status(400).json({
+        success: false,
+        data: formatSchemaError(validation.error),
+      });
+    }
+
+    await postToFile(updatedPost);
+
     return res.status(200).json({
       success: true,
-      data: post,
+      data: updatedPost,
     });
   } catch (err) {
     console.error(err);
     return res.status(500).send({
       success: false,
-      data: 'Internal error getting post',
+      data: 'Internal error updating post',
     });
   }
 }
