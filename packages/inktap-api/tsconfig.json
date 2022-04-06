@@ -3,11 +3,11 @@
   "compilerOptions": {
     "strict": true,
     "esModuleInterop": true,
-    "baseUrl": ".",
+    "baseUrl": "src",
     "paths": {
-      "__types__": ["./src/__types__"],
-      "__constants__": ["./src/constants"],
-      "__utils__": ["./src/utils"]
+      "__types__": ["./__types__"],
+      "__constants__": ["./constants.ts"],
+      "__utils__": ["./utils"]
     }
   }
 }
