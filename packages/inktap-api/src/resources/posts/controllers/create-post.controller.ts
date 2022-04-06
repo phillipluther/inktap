@@ -1,20 +1,18 @@
 import { Request, Response } from 'express';
 import { nanoid } from 'nanoid';
 import path from 'path';
-import dayjs from 'dayjs';
 import { writeFile, mkdir } from 'fs/promises';
 import matter from 'gray-matter';
 import { Post as P } from '__types__';
 import { CONTENT_DIR } from '__constants__';
 import { createSlug, formatSchemaError } from '__utils__';
-import { Post } from './post.model';
+import Post from '../post.model';
 
 export default async function (req: Request, res: Response): Promise<Response> {
   try {
     const { body: postData } = req;
     const id = nanoid();
     const published = new Date();
-    const timeHash = dayjs(published).format('YYYY-MM-DD');
 
     const post: P = {
       ...postData,
@@ -33,7 +31,7 @@ export default async function (req: Request, res: Response): Promise<Response> {
       });
     }
 
-    const postDir = path.join(CONTENT_DIR, `${timeHash}-${post.slug}`);
+    const postDir = path.join(CONTENT_DIR, id);
     const postFilepath = path.join(postDir, `${id}.md`);
 
     await mkdir(postDir, { recursive: true });
@@ -48,7 +46,7 @@ export default async function (req: Request, res: Response): Promise<Response> {
     //
     console.error(err);
     return res.status(500).send({
-      message: 'Internal API error',
+      message: 'Internal error creating post',
     });
   }
 }

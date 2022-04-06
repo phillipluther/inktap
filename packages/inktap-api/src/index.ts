@@ -1,5 +1,6 @@
 import express from 'express';
 import { json, urlencoded } from 'body-parser';
+import morgan from 'morgan';
 import postRoutes from './resources/posts/posts.routes';
 
 const options = {
@@ -13,6 +14,7 @@ const app = express();
 app.disable('x-powered-by');
 app.use(json());
 app.use(urlencoded({ extended: true }));
+app.use(morgan(options.isProd ? 'common' : 'dev'));
 
 app.use('/posts', postRoutes);
 
