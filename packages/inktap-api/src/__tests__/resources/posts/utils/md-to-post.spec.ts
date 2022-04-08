@@ -1,10 +1,11 @@
-import mdToPost from './md-to-post';
-import Post from '../post.model';
+import mdToPost from '../../../../resources/posts/utils/md-to-post';
+import Post from '../../../../resources/posts/post.model';
+import { POSTS_DIR } from '__constants__';
 import path from 'path';
 import { readFileSync } from 'fs';
 
 describe('mdToPost()', () => {
-  const goodMd = readFileSync(path.resolve('src/__test__/posts/one-post.md')).toString();
+  const goodMd = readFileSync(path.join(POSTS_DIR, 'one-post.md')).toString();
   const badMd = '---\nbad:true\n---\nSuper invalid markdown';
 
   test('returns a Post object given markdown', () => {

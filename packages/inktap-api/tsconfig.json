@@ -8,7 +8,7 @@
       "__types__": ["./__types__"],
       "__constants__": ["./constants.ts"],
       "__utils__": ["./utils"],
-      "__test__": ["./__test__"]
+      "__tests__": ["./__tests__"]
     }
   }
 }

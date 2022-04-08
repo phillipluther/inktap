@@ -1,4 +1,4 @@
-import getAllPosts from './get-all-posts';
+import getAllPosts from '../../../../resources/posts/utils/get-all-posts';
 
 describe('getAllPosts()', () => {
   beforeEach(() => {});

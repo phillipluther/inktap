@@ -22,6 +22,6 @@ export default async function getPost(id: string): Promise<Post | null> {
     // additional logging
     //
     console.error(err);
-    return null;
+    throw new Error('Could not get post by ID');
   }
 }

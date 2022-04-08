@@ -1,5 +1,5 @@
-import getPostById from './get-post-by-id';
-import Post from '../post.model';
+import getPostById from '../../../../resources/posts/utils/get-post-by-id';
+import Post from '../../../../resources/posts/post.model';
 
 describe('getPostById()', () => {
   test('reads a file and returns a Post', async () => {

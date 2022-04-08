@@ -5,20 +5,21 @@ import postToMd from './post-to-md';
 import { PostType as P } from '../post.model';
 import { POSTS_DIR } from '__constants__';
 
-export default async function postToFile(post: P): Promise<P | null> {
+export default async function postToFile(post: P): Promise<P> {
   try {
     const { id = nanoid(), ...postData } = post;
-    const md = postToMd({
+    const postToWrite = {
       id,
       ...postData,
-    });
+    };
+    const md = postToMd(postToWrite);
 
     await mkdir(POSTS_DIR, { recursive: true });
     await writeFile(path.join(POSTS_DIR, `${id}.md`), md);
 
-    return post;
+    return postToWrite;
   } catch (err) {
     console.error(err);
-    return null;
+    throw new Error('Could not write post to file');
   }
 }

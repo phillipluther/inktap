@@ -5,6 +5,6 @@ const { compilerOptions } = require('./tsconfig');
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  testPathIgnorePatterns: ['node_modules', 'mock-data'],
+  testPathIgnorePatterns: ['node_modules', '_content', '_helpers'],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/src/' }),
 };

@@ -20,7 +20,6 @@ export default async function getAllPosts(userOpts = {}): Promise<P[]> {
     const postFiles = await readdir(opts.postsDir);
     const posts: P[] = [];
 
-    console.log('postfiles', postFiles);
     for (let file of postFiles) {
       if (/\.md$/.test(file)) {
         const md = await readFile(path.join(opts.postsDir, file));
@@ -34,6 +33,6 @@ export default async function getAllPosts(userOpts = {}): Promise<P[]> {
     // additional logging
     //
     console.error(err);
-    return [];
+    throw new Error('Could not get all posts');
   }
 }
