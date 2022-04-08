@@ -18,6 +18,9 @@ export default async function getPost(id: string): Promise<Post | null> {
 
     return post;
   } catch (err) {
+    //
+    // additional logging
+    //
     console.error(err);
     return null;
   }

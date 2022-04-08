@@ -7,7 +7,8 @@
     "paths": {
       "__types__": ["./__types__"],
       "__constants__": ["./constants.ts"],
-      "__utils__": ["./utils"]
+      "__utils__": ["./utils"],
+      "__test__": ["./__test__"]
     }
   }
 }

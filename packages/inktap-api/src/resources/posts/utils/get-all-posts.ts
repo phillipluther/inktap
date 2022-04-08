@@ -1,17 +1,29 @@
 import path from 'path';
+import { existsSync } from 'fs';
 import { readdir, readFile } from 'fs/promises';
 import { Post as P } from '__types__';
 import { POSTS_DIR } from '__constants__';
 import { mdToPost } from '__utils__';
 
-export default async function getAllPosts(options = {}): Promise<P[]> {
+const defaultOps = {
+  postsDir: POSTS_DIR,
+};
+
+export default async function getAllPosts(userOpts = {}): Promise<P[]> {
   try {
-    const postFiles = await readdir(POSTS_DIR);
+    const opts = { ...defaultOps, ...userOpts };
+
+    if (!existsSync(opts.postsDir)) {
+      return [];
+    }
+
+    const postFiles = await readdir(opts.postsDir);
     const posts: P[] = [];
 
+    console.log('postfiles', postFiles);
     for (let file of postFiles) {
       if (/\.md$/.test(file)) {
-        const md = await readFile(path.join(POSTS_DIR, file));
+        const md = await readFile(path.join(opts.postsDir, file));
         posts.push(mdToPost(md.toString()));
       }
     }

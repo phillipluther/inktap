@@ -5,8 +5,6 @@ const { compilerOptions } = require('./tsconfig');
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
+  testPathIgnorePatterns: ['node_modules', 'mock-data'],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/src/' }),
-  // moduleNameMapper: {
-  //   '/^__constants__/': '<rootDir>/src/constants.ts',
-  // },
 };
