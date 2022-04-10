@@ -1,10 +1,6 @@
 import { Request, Response } from 'express';
 import { nanoid } from 'nanoid';
-import path from 'path';
-import { writeFile, mkdir } from 'fs/promises';
-import matter from 'gray-matter';
-import { Post as P } from '__types__';
-import { POSTS_DIR } from '__constants__';
+import { Post as P } from '@types';
 import { createSlug, postToFile, formatSchemaError } from '__utils__';
 import Post from '../post.model';
 
@@ -29,12 +25,6 @@ export default async function (req: Request, res: Response): Promise<Response> {
         data: formatSchemaError(validation.error),
       });
     }
-
-    // await mkdir(POSTS_DIR, { recursive: true });
-    // const postFilepath = path.join(POSTS_DIR, `${id}.md`);
-
-    // const { markdown, ...frontmatter } = post;
-    // await writeFile(postFilepath, matter.stringify(markdown, frontmatter));
 
     await postToFile(post);
     return res.status(201).json({

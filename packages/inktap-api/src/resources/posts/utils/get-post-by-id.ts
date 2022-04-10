@@ -1,9 +1,9 @@
 import path from 'path';
 import { existsSync } from 'fs';
 import { readFile } from 'fs/promises';
-import { Post } from '__types__';
-import { mdToPost } from '__utils__';
-import { POSTS_DIR } from '__constants__';
+import { Post } from '@types';
+import { mdToPost } from '../utils';
+import { POSTS_DIR } from '@constants';
 
 export default async function getPost(id: string): Promise<Post | null> {
   try {

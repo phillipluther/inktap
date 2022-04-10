@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import getPostById from '../utils/get-post-by-id';
 import Post from '../post.model';
-import { Post as P } from '__types__';
+import { Post as P } from '@types';
 import { formatSchemaError, postToFile } from '__utils__';
 
 export default async function (req: Request, res: Response): Promise<Response> {

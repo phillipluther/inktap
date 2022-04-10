@@ -2,7 +2,7 @@ import path from 'path';
 import { Request, Response } from 'express';
 import { rm } from 'fs/promises';
 import getPostById from '../utils/get-post-by-id';
-import { POSTS_DIR } from '__constants__';
+import { POSTS_DIR } from 'constants';
 
 export default async function (req: Request, res: Response): Promise<Response> {
   try {

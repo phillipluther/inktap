@@ -5,10 +5,10 @@
     "esModuleInterop": true,
     "baseUrl": "src",
     "paths": {
-      "__types__": ["./__types__"],
-      "__constants__": ["./constants.ts"],
-      "__utils__": ["./utils"],
-      "__tests__": ["./__tests__"]
-    }
+      "@types": ["./@types"],
+      "@constants": ["./constants.ts"],
+      "@src/*": ["./*"]
+    },
+    "typeRoots": ["./src/@types", "node_modules/@types"]
   }
 }

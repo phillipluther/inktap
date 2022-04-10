@@ -3,7 +3,7 @@ import { writeFile, mkdir } from 'fs/promises';
 import { nanoid } from 'nanoid';
 import postToMd from './post-to-md';
 import { PostType as P } from '../post.model';
-import { POSTS_DIR } from '__constants__';
+import { POSTS_DIR } from '@constants';
 
 export default async function postToFile(post: P): Promise<P> {
   try {

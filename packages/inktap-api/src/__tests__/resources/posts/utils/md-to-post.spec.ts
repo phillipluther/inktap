@@ -1,6 +1,6 @@
 import mdToPost from '../../../../resources/posts/utils/md-to-post';
 import Post from '../../../../resources/posts/post.model';
-import { POSTS_DIR } from '__constants__';
+import { POSTS_DIR } from 'constants';
 import path from 'path';
 import { readFileSync } from 'fs';
 

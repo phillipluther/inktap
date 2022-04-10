@@ -1,5 +1,5 @@
 import matter from 'gray-matter';
-import { Post as P } from '__types__';
+import { Post as P } from '@types';
 import Post from '../post.model';
 
 export default function (md: string): P {

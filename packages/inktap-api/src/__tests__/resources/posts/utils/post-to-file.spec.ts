@@ -1,6 +1,6 @@
 import postToFile from '../../../../resources/posts/utils/post-to-file';
 import postData from '../../../_helpers/posts.mock';
-import { POSTS_DIR } from '__constants__';
+import { POSTS_DIR } from 'constants';
 import { existsSync, rmSync } from 'fs';
 import path from 'path';
 
