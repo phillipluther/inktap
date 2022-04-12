@@ -7,7 +7,8 @@
     "paths": {
       "@types": ["./@types"],
       "@constants": ["./constants.ts"],
-      "@src/*": ["./*"]
+      "@src/*": ["./*"],
+      "@utils": ["./utils"]
     },
     "typeRoots": ["./src/@types", "node_modules/@types"]
   }

@@ -17,7 +17,7 @@ export default (resource: Resources) => async (req: Request, res: Response, next
     if (existsSync(resourceDir)) {
       for (let filename of filenames) {
         if (suffixTest.test(filename)) {
-          const result = await readFile(path.join(resourceDir, `${filename}${suffix}`));
+          const result = await readFile(path.join(resourceDir, filename));
           results.push(result.toString());
         }
       }
