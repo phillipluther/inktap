@@ -1,5 +1,5 @@
 import { z, ZodError } from 'zod';
-import formatSchemaError from '../../utils/format-schema-error';
+import formatSchemaError from '../format-schema-error';
 
 const schema = z.object({
   name: z.string(),

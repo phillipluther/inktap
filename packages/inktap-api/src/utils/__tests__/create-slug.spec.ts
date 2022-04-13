@@ -1,4 +1,4 @@
-import createSlug from '../../utils/create-slug';
+import createSlug from '../create-slug';
 
 describe('createSlug()', () => {
   test('returns a slugified string from a given sentence', () => {
