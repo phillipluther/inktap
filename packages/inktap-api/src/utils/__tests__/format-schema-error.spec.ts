@@ -19,7 +19,7 @@ function schemaError(
   }
 }
 
-describe('formatSchemaError()', () => {
+describe('utils/formatSchemaError()', () => {
   it('warns of required fields', () => {
     expect(formatSchemaError(schemaError() as ZodError)).toContain('required');
   });

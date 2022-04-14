@@ -2,6 +2,7 @@ import { vol } from 'memfs';
 import { nanoid } from 'nanoid';
 import saveResourceAsJson from '../save-resource-as-json';
 import { Tag } from '@types';
+import { TAG_SUFFIX } from '@constants';
 
 jest.mock('fs/promises');
 
@@ -10,7 +11,7 @@ describe('utils/saveAsJson()', () => {
 
   beforeEach(() => {
     vol.reset();
-    vol.fromJSON({ './dir/single-file.txt': 'content' }, '/test');
+    vol.fromJSON({ './data/tags/single-file.json': '"content"' }, '/test');
     testResource = {
       id: nanoid(),
       name: 'test',
@@ -19,13 +20,13 @@ describe('utils/saveAsJson()', () => {
   });
 
   test('creates a file named by ID in a given directory', async () => {
-    await saveResourceAsJson('/test/dir', testResource);
-    expect(vol.existsSync(`/test/dir/${testResource.id}.json`)).toBe(true);
+    await saveResourceAsJson(testResource);
+    expect(vol.existsSync(`/test/data/tags/${testResource.id}${TAG_SUFFIX}`)).toBe(true);
   });
 
-  test('creates a directory if nonexistent', async () => {
-    await saveResourceAsJson('/test/new/nested/dir', testResource);
-    expect(vol.existsSync(`/test/new/nested/dir/${testResource.id}.json`)).toBe(true);
+  test('returns the created resource filepath', async () => {
+    const filepath = await saveResourceAsJson(testResource);
+    expect(filepath).toEqual(`/test/data/tags/${testResource.id}${TAG_SUFFIX}`);
   });
 
   test('logs and throws on error', async () => {
@@ -34,7 +35,7 @@ describe('utils/saveAsJson()', () => {
 
     try {
       // @ts-ignore
-      await saveResourceAsJson('/test/dir', null);
+      await saveResourceAsJson(null);
     } catch (err: any) {
       expect(spy).toHaveBeenCalledTimes(1);
       expect(err.toString()).toContain('Could not write data');

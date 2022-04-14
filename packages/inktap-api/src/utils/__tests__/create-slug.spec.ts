@@ -1,6 +1,6 @@
 import createSlug from '../create-slug';
 
-describe('createSlug()', () => {
+describe('utils/createSlug()', () => {
   test('returns a slugified string from a given sentence', () => {
     expect(createSlug('my funny slug')).toEqual('my-funny-slug');
   });

@@ -1,6 +1,6 @@
 import path from 'path';
 import { Resource } from '@types';
-import { DATA_DIR, RESOURCE_DIRS, RESOURCE_SUFFIXES } from '@constants';
+import { RESOURCE_DIRS, RESOURCE_SUFFIXES } from '@constants';
 import { readFile } from '@utils';
 import { mdToPost } from '@src/resources/posts/utils';
 
