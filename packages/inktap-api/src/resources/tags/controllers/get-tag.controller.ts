@@ -1,11 +1,9 @@
 import { Request, Response } from 'express';
-import path from 'path';
-import { TAGS_DIR } from '@constants';
-import { readFile } from '@utils';
+import { getResourceById } from '@utils';
 
 export default async function getTag(req: Request, res: Response) {
   try {
-    const result = await readFile(path.join(TAGS_DIR, `${req.params.id}.json`));
+    const result = await getResourceById('tag', req.params.id);
 
     if (!result) {
       res.status(404).json({
@@ -15,7 +13,7 @@ export default async function getTag(req: Request, res: Response) {
     } else {
       res.status(200).json({
         success: true,
-        data: JSON.parse(result),
+        data: result,
       });
     }
   } catch (err) {
