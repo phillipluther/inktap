@@ -1,8 +1,7 @@
 import path from 'path';
 import { Resource } from '@types';
 import { RESOURCE_DIRS, RESOURCE_SUFFIXES } from '@constants';
-import { readFile } from '@utils';
-import { mdToPost } from '@src/resources/posts/utils';
+import { parseMarkdownToResource, readFile } from '@utils';
 
 export default async function getResourceById(resourceType: Resource, id: string) {
   try {
@@ -14,7 +13,9 @@ export default async function getResourceById(resourceType: Resource, id: string
     if (!fileContents) {
       return null;
     }
-    return /\.json$/.test(suffix) ? JSON.parse(fileContents) : mdToPost(fileContents);
+    return /\.json$/.test(suffix)
+      ? JSON.parse(fileContents)
+      : parseMarkdownToResource(fileContents);
   } catch (err) {
     console.error(err);
     throw new Error('Could not get resource by ID');

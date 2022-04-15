@@ -1,12 +1,21 @@
 import { Request, Response } from 'express';
+import { formatSchemaError } from '@src/utils';
 
 export default async function createOne(req: Request, res: Response) {
   try {
-    const { resource } = req;
+    const { isValid, data, error } = req.resource;
+
+    if (!isValid) {
+      res.status(400).json({
+        success: false,
+        data: formatSchemaError(error),
+      });
+      return;
+    }
 
     res.status(201).json({
       success: true,
-      data: resource,
+      data,
     });
   } catch (err) {
     //

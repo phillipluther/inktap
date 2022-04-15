@@ -1,17 +1,13 @@
-import { Request, Response } from 'express';
-import { nanoid } from 'nanoid';
+import { NextFunction, Request, Response } from 'express';
 import { Post as P } from '@types';
 import { createSlug, formatSchemaError, saveResourceAsMarkdown } from '@utils';
-import Post from '../post.model';
+import Post from '@src/models/post.model';
 
-export default async function (req: Request, res: Response) {
+export default async function (req: Request, res: Response, next: NextFunction) {
   try {
     const { body: postData } = req;
-    const id = nanoid();
     const post: P = {
       ...postData,
-      id,
-      created: new Date(),
       slug: postData.slug || createSlug(postData.title || ''),
     };
 
@@ -22,13 +18,12 @@ export default async function (req: Request, res: Response) {
         success: false,
         data: formatSchemaError(validation.error),
       });
-    } else {
-      await saveResourceAsMarkdown(post);
-      res.status(201).json({
-        success: true,
-        data: post,
-      });
+      return;
     }
+
+    console.log('validation', validation);
+    req.resource = post;
+    next();
   } catch (err) {
     //
     // error handling

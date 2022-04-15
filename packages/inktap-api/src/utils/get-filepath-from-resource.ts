@@ -1,7 +1,7 @@
 import path from 'path';
 import { PathLike } from 'fs';
-import Tag from '../resources/tags/tag.model';
-import Post from '../resources/posts/post.model';
+import Tag from '@src/models/tag.model';
+import Post from '@src/models/post.model';
 import { DATA_DIR, TAGS_DIR, POSTS_DIR, RESOURCE_SUFFIXES } from '@constants';
 import { Tag as T, Post as P } from '@types';
 

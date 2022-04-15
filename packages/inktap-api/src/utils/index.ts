@@ -8,3 +8,4 @@ export { default as saveResourceAsJson } from './save-resource-as-json';
 export { default as saveResourceAsMarkdown } from './save-resource-as-markdown';
 export { default as updateHistory } from './update-history';
 export { default as withControllers } from './with-controllers';
+export { default as parseMarkdownToResource } from './parse-markdown-to-resource';

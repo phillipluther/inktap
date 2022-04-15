@@ -1,11 +1,9 @@
 import { Router } from 'express';
 import { withControllers } from '@utils';
+import createPost from './create-post';
 
 const router = Router();
 
-router.route('/').post((req, res, next) => {
-  console.log('OK!');
-  next();
-});
+router.route('/').post(createPost);
 
 export default withControllers(router);

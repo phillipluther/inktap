@@ -1,5 +1,5 @@
-export { PostType as Post } from '../resources/posts/post.model';
-export { TagType as Tag } from '../resources/tags/tag.model';
+export { PostType as Post } from '@src/models/post.model';
+export { TagType as Tag } from '@src/models/tag.model';
 
 export type Resource = 'tag' | 'post';
 export type Resources = 'tags' | 'posts';
