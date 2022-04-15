@@ -1,15 +1,11 @@
-// import { Router } from 'express';
-// import getAllPosts from './controllers/get-all-posts.controller';
-// import getPost from './controllers/get-post.controller';
-// import createPost from './controllers/create-post.controller';
-// import deletePost from './controllers/delete-post.controller';
-// import updatePost from './controllers/update-post.controller';
+import { Router } from 'express';
+import { withControllers } from '@utils';
 
-// const router = Router();
+const router = Router();
 
-// router.route('/').get(getAllPosts).post(createPost);
-// router.route('/:id').get(getPost).delete(deletePost).put(updatePost);
+router.route('/').post((req, res, next) => {
+  console.log('OK!');
+  next();
+});
 
-// export default router;
-
-export default {};
+export default withControllers(router);

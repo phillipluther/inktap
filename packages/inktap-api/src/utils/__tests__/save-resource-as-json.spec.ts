@@ -6,7 +6,7 @@ import { TAG_SUFFIX } from '@constants';
 
 jest.mock('fs/promises');
 
-describe('utils/saveAsJson()', () => {
+describe('utils/saveResourceAsJson()', () => {
   let testResource: Tag;
 
   beforeEach(() => {

@@ -17,7 +17,7 @@ describe('utils/getResourceById()', () => {
           name: 'test',
           created: dateStr,
         }),
-        './data/posts/abcde.post.md': `---\ntitle: "Title"\npublished: ${dateStr}\nid: abcde\n---\nTest\n`,
+        './data/posts/abcde.post.md': `---\ntitle: "Title"\ncreated: ${dateStr}\nid: abcde\n---\nTest\n`,
       },
       '/test',
     );

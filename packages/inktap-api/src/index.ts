@@ -1,7 +1,7 @@
 import express from 'express';
 import { json, urlencoded } from 'body-parser';
 import morgan from 'morgan';
-// import postRoutes from './resources/posts/posts.routes';
+import postRoutes from './resources/posts/posts.routes';
 import tagRoutes from './resources/tags/tags.routes';
 
 const options = {
@@ -17,7 +17,7 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan(options.isProd ? 'common' : 'dev'));
 
-// app.use('/posts', postRoutes);
+app.use('/posts', postRoutes);
 app.use('/tags', tagRoutes);
 
 app.use('*', (req, res) => {

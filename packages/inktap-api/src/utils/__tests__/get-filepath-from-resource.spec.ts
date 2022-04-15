@@ -13,7 +13,7 @@ describe('utils/getFilepathFromResource()', () => {
     id: '234',
     title: 'Test',
     markdown: 'test',
-    published: new Date(),
+    created: new Date(),
   };
 
   test('returns a string', () => {

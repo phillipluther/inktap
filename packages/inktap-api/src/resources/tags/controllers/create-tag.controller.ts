@@ -6,9 +6,10 @@ import Tag from '../tag.model';
 
 export default async function (req: Request, res: Response) {
   try {
+    const { body: tagData } = req;
     const id = nanoid();
     const tag: T = {
-      ...req.body,
+      ...tagData,
       id,
       created: new Date(),
     };
