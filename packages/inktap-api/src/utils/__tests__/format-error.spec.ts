@@ -20,15 +20,24 @@ function schemaError(
 }
 
 describe('utils/formatError()', () => {
-  it('warns of required fields', () => {
+  it('warns of required schema fields', () => {
     expect(formatError(schemaError() as ZodError)).toContain('required');
   });
 
-  it('warns of invalid types', () => {
+  it('warns of invalid schema types', () => {
     const err = schemaError({ name: 'j', siblings: [22] }) as ZodError;
     const errMessage = formatError(err);
 
     expect(errMessage).toContain('Expected string');
     expect(errMessage).toContain('siblings');
+  });
+
+  it('formats generic errors', () => {
+    const err = new Error('Invalid');
+    expect(formatError(err)).toContain('Invalid');
+  });
+
+  it('handles and returns error message strings', () => {
+    expect(formatError('bad')).toEqual('bad');
   });
 });
