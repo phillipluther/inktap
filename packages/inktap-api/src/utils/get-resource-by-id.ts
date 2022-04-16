@@ -13,6 +13,7 @@ export default async function getResourceById(resourceType: Resource, id: string
     if (!fileContents) {
       return null;
     }
+
     return /\.json$/.test(suffix)
       ? JSON.parse(fileContents)
       : parseMarkdownToResource(fileContents);

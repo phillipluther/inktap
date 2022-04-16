@@ -1,22 +1,31 @@
 import { Request, Response } from 'express';
-import { formatSchemaError } from '@src/utils';
+import { formatSchemaError, saveResource } from '@src/utils';
 
 export default async function createOne(req: Request, res: Response) {
   try {
-    const { isValid, data, error } = req.resource;
-
-    if (!isValid) {
+    if (!req.resource) {
       res.status(400).json({
         success: false,
-        data: formatSchemaError(error),
+        data: 'Nothing to update',
       });
       return;
     }
 
-    res.status(201).json({
-      success: true,
-      data,
-    });
+    const { isValid, data, error } = req.resource;
+
+    if (isValid === true && data) {
+      await saveResource(data);
+
+      res.status(201).json({
+        success: true,
+        data,
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        data: error ? formatSchemaError(error) : 'Malformed resource',
+      });
+    }
   } catch (err) {
     //
     // logging

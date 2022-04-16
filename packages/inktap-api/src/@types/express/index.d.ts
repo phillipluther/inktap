@@ -1,6 +1,6 @@
 import { Express } from 'express-serve-static-core';
 import { Post, Tag } from '@types';
-import { ZodError, ZodErrorMap } from 'zod';
+import { ZodError } from 'zod';
 
 declare module 'express-serve-static-core' {
   interface Request {
@@ -8,7 +8,7 @@ declare module 'express-serve-static-core' {
     resource?: {
       isValid: boolean;
       data?: Post | Tag;
-      error?: ZodFormattedError;
+      error?: ZodError;
     };
   }
 }

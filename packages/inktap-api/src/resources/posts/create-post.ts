@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
+import { ZodError } from 'zod';
 import { Post as P } from '@types';
-import { createSlug, formatSchemaError, saveResourceAsMarkdown } from '@utils';
+import { createSlug } from '@utils';
 import Post from '@src/models/post.model';
 
 export default async function (req: Request, res: Response, next: NextFunction) {
@@ -11,18 +12,23 @@ export default async function (req: Request, res: Response, next: NextFunction) 
       slug: postData.slug || createSlug(postData.title || ''),
     };
 
-    const validation = Post.safeParse(post);
+    const parsed = Post.safeParse(post);
+    const resource: {
+      isValid: boolean;
+      data?: P;
+      error?: ZodError;
+    } = {
+      isValid: true,
+    };
 
-    if (!validation.success) {
-      res.status(400).json({
-        success: false,
-        data: formatSchemaError(validation.error),
-      });
-      return;
+    if (parsed.success === true) {
+      resource.data = parsed.data;
+    } else {
+      resource.isValid = false;
+      resource.error = parsed.error;
     }
 
-    console.log('validation', validation);
-    req.resource = post;
+    req.resource = resource;
     next();
   } catch (err) {
     //

@@ -5,7 +5,7 @@ import Post from '@src/models/post.model';
 import { DATA_DIR, TAGS_DIR, POSTS_DIR, RESOURCE_SUFFIXES } from '@constants';
 import { Tag as T, Post as P } from '@types';
 
-export default function getFilepathFromResource(resource: T | P): PathLike {
+export default function getFilepathFromResource(resource: T | P): string {
   let dir = DATA_DIR;
   let suffix = '.unknown.json';
 
