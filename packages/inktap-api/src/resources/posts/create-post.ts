@@ -13,22 +13,22 @@ export default async function (req: Request, res: Response, next: NextFunction) 
     };
 
     const parsed = Post.safeParse(post);
-    const resource: {
+    const dataObj: {
       isValid: boolean;
-      data?: P;
+      result?: P;
       error?: ZodError;
     } = {
       isValid: true,
     };
 
     if (parsed.success === true) {
-      resource.data = parsed.data;
+      dataObj.result = parsed.data;
     } else {
-      resource.isValid = false;
-      resource.error = parsed.error;
+      dataObj.isValid = false;
+      dataObj.error = parsed.error;
     }
 
-    req.resource = resource;
+    req.data = dataObj;
     next();
   } catch (err) {
     //

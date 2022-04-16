@@ -1,5 +1,5 @@
 import { z, ZodError } from 'zod';
-import formatSchemaError from '../format-schema-error';
+import formatError from '../format-error';
 
 const schema = z.object({
   name: z.string(),
@@ -19,14 +19,14 @@ function schemaError(
   }
 }
 
-describe('utils/formatSchemaError()', () => {
+describe('utils/formatError()', () => {
   it('warns of required fields', () => {
-    expect(formatSchemaError(schemaError() as ZodError)).toContain('required');
+    expect(formatError(schemaError() as ZodError)).toContain('required');
   });
 
   it('warns of invalid types', () => {
     const err = schemaError({ name: 'j', siblings: [22] }) as ZodError;
-    const errMessage = formatSchemaError(err);
+    const errMessage = formatError(err);
 
     expect(errMessage).toContain('Expected string');
     expect(errMessage).toContain('siblings');

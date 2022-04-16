@@ -4,11 +4,15 @@ import { ZodError } from 'zod';
 
 declare module 'express-serve-static-core' {
   interface Request {
-    data?: string | string[];
+    data?: {
+      isValid: boolean;
+      result?: Post | Tag | Post[] | Tag[];
+      error?: ZodError | string;
+    };
     resource?: {
       isValid: boolean;
       data?: Post | Tag;
-      error?: ZodError;
+      error?: ZodError | string;
     };
   }
 }

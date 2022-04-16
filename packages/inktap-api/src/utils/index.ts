@@ -1,6 +1,6 @@
 export { default as createSlug } from './create-slug';
 export { default as forEachFile } from './for-each-file';
-export { default as formatSchemaError } from './format-schema-error';
+export { default as formatError } from './format-error';
 export { default as getFilepathFromResource } from './get-filepath-from-resource';
 export { default as getResourceById } from './get-resource-by-id';
 export { default as readFile } from './read-file';
