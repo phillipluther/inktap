@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { ZodError } from 'zod';
-import { Post as P } from '@types';
+import { Post as P, RequestData } from '@types';
 import { createSlug } from '@utils';
 import Post from '@src/models/post.model';
 
@@ -13,11 +12,7 @@ export default async function (req: Request, res: Response, next: NextFunction) 
     };
 
     const parsed = Post.safeParse(post);
-    const dataObj: {
-      isValid: boolean;
-      result?: P;
-      error?: ZodError;
-    } = {
+    const dataObj: RequestData = {
       isValid: true,
     };
 

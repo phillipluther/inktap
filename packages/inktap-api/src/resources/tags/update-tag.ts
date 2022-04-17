@@ -1,16 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
 import { getResourceById, formatError } from '@src/utils';
-import Post from '@src/models/post.model';
-import { Post as P } from '@types';
+import Tag from '@src/models/tag.model';
+import { Tag as T } from '@types';
 
-export default async function updatePost(req: Request, res: Response, next: NextFunction) {
+export default async function updateTag(req: Request, res: Response, next: NextFunction) {
   try {
     const { id } = req.params;
     const { body } = req;
-    const post: P = await getResourceById('post', id);
+    const tag: T = await getResourceById('tag', id);
 
-    if (post) {
-      const parsed = Post.safeParse({ ...post, ...body });
+    if (tag) {
+      const parsed = Tag.safeParse({ ...tag, ...body });
 
       if (parsed.success) {
         parsed.data.updated.push(new Date());
@@ -27,7 +27,7 @@ export default async function updatePost(req: Request, res: Response, next: Next
     } else {
       req.data = {
         isValid: false,
-        error: `No post found with ID ${id}`,
+        error: `No tag found with ID ${id}`,
       };
     }
 

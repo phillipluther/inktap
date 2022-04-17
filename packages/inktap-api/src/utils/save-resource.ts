@@ -9,6 +9,7 @@ export default async function saveResource(resource: Tag | Post): Promise<string
     const filepath = getFilepathFromResource(resource);
     const { dir } = path.parse(filepath);
 
+    console.log('FILEPATH', filepath);
     await mkdir(dir, { recursive: true });
 
     if (/\.md$/.test(filepath)) {

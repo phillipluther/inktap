@@ -1,19 +1,19 @@
 import { NextFunction, Request, Response } from 'express';
 import { forEachFile, parseMarkdownToResource } from '@src/utils';
-import { POSTS_DIR } from '@src/constants';
-import { Post } from '@types';
+import { TAGS_DIR } from '@src/constants';
+import { Tag as T } from '@types';
 
-export default async function getMultiplePosts(req: Request, res: Response, next: NextFunction) {
+export default async function getMultipleTags(req: Request, res: Response, next: NextFunction) {
   try {
-    const posts: Post[] = [];
+    const tags: T[] = [];
 
-    await forEachFile(POSTS_DIR, (md) => {
-      posts.push(parseMarkdownToResource(md));
+    await forEachFile(TAGS_DIR, (json) => {
+      tags.push(JSON.parse(json));
     });
 
     req.data = {
       isValid: true,
-      result: posts,
+      result: tags,
     };
 
     next();

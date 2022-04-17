@@ -1,13 +1,15 @@
 import { Router } from 'express';
-import createTag from './controllers/create-tag.controller';
-import getMultipleTags from './controllers/get-multiple-tags.controller';
-import getTag from './controllers/get-tag.controller';
-import updateTag from './controllers/update-tag.controller';
-import deleteTag from './controllers/delete-tag.controller';
+import { withControllers } from '@utils';
+
+import createTag from './create-tag';
+import getMultipleTags from './get-multiple-tags';
+import getTag from './get-tag';
+import updateTag from './update-tag';
+import deleteTag from './delete-tag';
 
 const router = Router();
 
 router.route('/').get(getMultipleTags).post(createTag);
-router.route('/:id').delete(deleteTag).get(getTag).put(updateTag);
+router.route('/:id').delete(deleteTag).get(getTag).patch(updateTag).put(updateTag);
 
-export default router;
+export default withControllers(router);
