@@ -1,18 +1,17 @@
 import path from 'path';
-import { PathLike } from 'fs';
-import Tag from '@src/models/tag.model';
-import Post from '@src/models/post.model';
 import { DATA_DIR, TAGS_DIR, POSTS_DIR, RESOURCE_SUFFIXES } from '@constants';
-import { Tag as T, Post as P } from '@types';
+import { SingleResource } from '@types';
+import { getResourceType } from '@src/utils';
 
-export default function getFilepathFromResource(resource: T | P): string {
+export default function getFilepathFromResource(resource: SingleResource): string {
+  const resourceType = getResourceType(resource);
   let dir = DATA_DIR;
   let suffix = '.unknown.json';
 
-  if (Post.safeParse(resource).success) {
+  if (resourceType === 'post') {
     dir = POSTS_DIR;
     suffix = RESOURCE_SUFFIXES.posts;
-  } else if (Tag.safeParse(resource).success) {
+  } else if (resourceType === 'tag') {
     dir = TAGS_DIR;
     suffix = RESOURCE_SUFFIXES.tags;
   }

@@ -8,17 +8,20 @@ export default async function saveResource(resource: Tag | Post): Promise<string
   try {
     const filepath = getFilepathFromResource(resource);
     const { dir } = path.parse(filepath);
+    const saveActions: Promise<void>[] = [];
 
-    console.log('FILEPATH', filepath);
     await mkdir(dir, { recursive: true });
 
     if (/\.md$/.test(filepath)) {
       const { markdown, markup, ...frontmatter } = resource as Post;
       const md = matter.stringify(markdown, frontmatter);
-      await writeFile(filepath, md);
+
+      saveActions.push(writeFile(filepath, md));
     } else {
-      await writeFile(filepath, JSON.stringify(resource));
+      saveActions.push(writeFile(filepath, JSON.stringify(resource)));
     }
+
+    await Promise.all(saveActions);
 
     return filepath;
   } catch (err) {

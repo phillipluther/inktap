@@ -3,6 +3,7 @@ export { default as forEachFile } from './for-each-file';
 export { default as formatError } from './format-error';
 export { default as getFilepathFromResource } from './get-filepath-from-resource';
 export { default as getResourceById } from './get-resource-by-id';
+export { default as getResourceType } from './get-resource-type';
 export { default as readFile } from './read-file';
 export { default as updateHistory } from './update-history';
 export { default as withControllers } from './with-controllers';
