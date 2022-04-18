@@ -12,12 +12,17 @@ describe('utils/getResourceById()', () => {
     vol.reset();
     vol.fromJSON(
       {
-        './data/tags/12345.tag.json': JSON.stringify({
+        './data/tags/12345.json': JSON.stringify({
           id: '12345',
           name: 'test',
           created: dateStr,
         }),
-        './data/posts/abcde.post.md': `---\ntitle: "Title"\ncreated: ${dateStr}\nid: abcde\n---\nTest\n`,
+        './data/posts/abcde.json': JSON.stringify({
+          title: 'Title',
+          created: dateStr,
+          id: 'abcde',
+          markdown: 'Test',
+        }),
       },
       '/test',
     );

@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
-import { forEachFile, parseMarkdownToResource } from '@src/utils';
+import { forEachFile } from '@src/utils';
 import { POSTS_DIR } from '@src/constants';
-import { Post } from '@types';
+import { Post as P } from '@types';
 
 export default async function getMultiplePosts(req: Request, res: Response, next: NextFunction) {
   try {
-    const posts: Post[] = [];
+    const posts: P[] = [];
 
-    await forEachFile(POSTS_DIR, (md) => {
-      posts.push(parseMarkdownToResource(md));
+    await forEachFile(POSTS_DIR, (json) => {
+      posts.push(JSON.parse(json));
     });
 
     req.data = {

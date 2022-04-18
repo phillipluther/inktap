@@ -22,7 +22,7 @@ export default async function createOne(req: Request, res: Response) {
         data: result,
       });
     } else {
-      let errorData = 'Malformed response';
+      let errorData = 'Malformed request';
 
       if (error) {
         errorData = typeof error === 'string' ? error : formatError(error);

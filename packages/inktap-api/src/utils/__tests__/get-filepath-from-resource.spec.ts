@@ -1,6 +1,6 @@
 import path from 'path';
 import getFilepathFromResource from '../get-filepath-from-resource';
-import { RESOURCE_DIRS, RESOURCE_SUFFIXES } from '@constants';
+import { RESOURCE_DIRS } from '@constants';
 
 describe('utils/getFilepathFromResource()', () => {
   const testTag = {
@@ -25,13 +25,13 @@ describe('utils/getFilepathFromResource()', () => {
 
   test('given a tag, resolves to the correct data dir', () => {
     const filepath = getFilepathFromResource(testTag);
-    const correctPath = path.join(RESOURCE_DIRS.tag, `${testTag.id}${RESOURCE_SUFFIXES.tag}`);
+    const correctPath = path.join(RESOURCE_DIRS.tag, `${testTag.id}.json`);
     expect(filepath).toEqual(correctPath);
   });
 
   test('given a post, resolves to the correct data dir', () => {
     const filepath = getFilepathFromResource(testPost);
-    const correctPath = path.join(RESOURCE_DIRS.post, `${testPost.id}${RESOURCE_SUFFIXES.post}`);
+    const correctPath = path.join(RESOURCE_DIRS.post, `${testPost.id}.json`);
     expect(filepath).toEqual(correctPath);
   });
 });

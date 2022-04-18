@@ -14,13 +14,3 @@ export const RESOURCE_DIRS = {
   post: POSTS_DIR,
   posts: POSTS_DIR,
 };
-
-export const TAG_SUFFIX = '.tag.json';
-export const POST_SUFFIX = '.post.md';
-
-export const RESOURCE_SUFFIXES: Suffixes = {
-  post: POST_SUFFIX,
-  posts: POST_SUFFIX,
-  tag: TAG_SUFFIX,
-  tags: TAG_SUFFIX,
-};

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { forEachFile, parseMarkdownToResource } from '@src/utils';
+import { forEachFile } from '@src/utils';
 import { TAGS_DIR } from '@src/constants';
 import { Tag as T } from '@types';
 

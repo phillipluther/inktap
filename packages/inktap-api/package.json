@@ -5,14 +5,14 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "deadfiles": "npx unimported"
   },
   "keywords": [],
   "author": "Phillip Luther <dev@phillipluther.com>",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.20.0",
-    "camelcase": "^6.3.0",
     "dayjs": "^1.11.0",
     "express": "^4.17.3",
     "gray-matter": "^4.0.3",
@@ -27,6 +27,7 @@
     "@types/jest": "^27.4.1",
     "@types/mock-fs": "^4.13.1",
     "@types/morgan": "^1.9.3",
+    "camelcase": "^6.3.0",
     "jest": "^27.5.1",
     "memfs": "^3.4.1",
     "ts-jest": "^27.1.4",

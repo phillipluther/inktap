@@ -1,7 +1,4 @@
 import { vol } from 'memfs';
-import { nanoid } from 'nanoid';
-import { Tag } from '@types';
-import { TAG_SUFFIX, POST_SUFFIX } from '@constants';
 import saveResource from '../save-resource';
 
 jest.mock('fs/promises');
@@ -14,7 +11,7 @@ describe('utils/saveResource()', () => {
     vol.reset();
     vol.fromJSON(
       {
-        './data/posts/single-file.post.md': 'content',
+        './data/posts/single-file.json': 'content',
         './data/tags/single-file.json': '"content"',
       },
       '/test',
@@ -32,17 +29,17 @@ describe('utils/saveResource()', () => {
 
   test('saves a resource as markdown', async () => {
     await saveResource(testPost);
-    expect(vol.existsSync(`/test/data/posts/${testPost.id}${POST_SUFFIX}`)).toBe(true);
+    expect(vol.existsSync(`/test/data/posts/${testPost.id}.json`)).toBe(true);
   });
 
   test('saves a resource as JSON', async () => {
     await saveResource(testTag);
-    expect(vol.existsSync(`/test/data/tags/${testTag.id}${TAG_SUFFIX}`)).toBe(true);
+    expect(vol.existsSync(`/test/data/tags/${testTag.id}.json`)).toBe(true);
   });
 
   test('returns the created resource filepath', async () => {
     const filepath = await saveResource(testPost);
-    expect(filepath).toEqual(`/test/data/posts/${testPost.id}${POST_SUFFIX}`);
+    expect(filepath).toEqual(`/test/data/posts/${testPost.id}.json`);
   });
 
   test('logs and throws on error', async () => {
