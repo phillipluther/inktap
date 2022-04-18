@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import CommonModel from './common.model';
+import BaseModel from './helpers/base-model-schema';
 import dateSchema from './helpers/date-schema';
 
-const PostModel = CommonModel.extend({
+const PostModel = BaseModel.extend({
   published: dateSchema.optional(),
   title: z.string(),
   markdown: z.string().default(''),

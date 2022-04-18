@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import CommonModel from './common.model';
+import BaseModel from './helpers/base-model-schema';
 
-const TagModel = CommonModel.extend({
+const TagModel = BaseModel.extend({
   name: z.string(),
 });
 

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { getResourceById, formatError } from '@src/utils';
-import Post from '@src/models/post.model';
+import Post from '@src/models/post';
 import { Post as P } from '@types';
 
 export default async function updatePost(req: Request, res: Response, next: NextFunction) {

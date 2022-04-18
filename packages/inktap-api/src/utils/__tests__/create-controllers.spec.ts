@@ -1,6 +1,6 @@
-import withControllers from '../with-controllers';
+import createControllers from '../create-controllers';
 
-describe('utils/withControllers()', () => {
+describe('utils/createControllers()', () => {
   let mockRouter: any;
 
   beforeEach(() => {
@@ -13,11 +13,11 @@ describe('utils/withControllers()', () => {
       delete: jest.fn().mockImplementation(() => mockRouter),
     };
 
-    withControllers(mockRouter);
+    createControllers(mockRouter);
   });
 
   test('returns a router instance', () => {
-    expect(withControllers(mockRouter)).toEqual(mockRouter);
+    expect(createControllers(mockRouter)).toEqual(mockRouter);
   });
 
   test('establishes two routes', () => {

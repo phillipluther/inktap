@@ -1,14 +1,19 @@
 import { Request, Response } from 'express';
-import { formatError } from '@src/utils';
+import { ZodSchema } from 'zod';
+import { SingleResource } from '@types';
+import { formatError, getResourceById } from '@src/utils';
+import { RESOURCE_BY_ROUTE } from '@src/constants';
 
-export default async function getOne(req: Request, res: Response) {
+const getOne = (Model: ZodSchema) => async (req: Request, res: Response) => {
   try {
-    const { data } = req;
+    const { id } = req.params;
+    const resourceType = RESOURCE_BY_ROUTE[req.baseUrl];
+    const resource: SingleResource = await getResourceById(resourceType, id);
 
-    if (!data || !data.isValid) {
+    if (!resource) {
       res.status(404).json({
         success: false,
-        data: formatError(data?.error || 'Could not get resource'),
+        data: formatError(`Could not find ${resourceType} with ID ${id}`),
       });
 
       return;
@@ -16,7 +21,7 @@ export default async function getOne(req: Request, res: Response) {
 
     res.status(200).json({
       success: true,
-      data: data.result,
+      data: resource,
     });
   } catch (err) {
     //
@@ -25,7 +30,9 @@ export default async function getOne(req: Request, res: Response) {
     console.error(err);
     res.status(500).json({
       success: false,
-      data: 'Could not retrieve resource',
+      data: formatError('Could not retrieve resource'),
     });
   }
-}
+};
+
+export default getOne;

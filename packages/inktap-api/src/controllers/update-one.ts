@@ -1,24 +1,44 @@
 import { Request, Response } from 'express';
+import { ZodSchema } from 'zod';
 import { SingleResource } from '@types';
-import { formatError, saveResource } from '@src/utils';
+import { formatError, saveResource, getResourceById } from '@src/utils';
+import { RESOURCE_BY_ROUTE } from '@src/constants';
 
-export default async function updateOne(req: Request, res: Response) {
+const updateOne = (Model: ZodSchema) => async (req: Request, res: Response) => {
   try {
-    if (!req.data?.isValid) {
-      res.status(400).json({
+    const { id } = req.params;
+    const resourceType = RESOURCE_BY_ROUTE[req.baseUrl];
+    const resource: SingleResource = await getResourceById(resourceType, id);
+
+    if (!resource) {
+      res.status(404).json({
         success: false,
-        data: formatError(req.data?.error || 'Nothing to create'),
+        data: formatError(`Could not find ${resourceType} with ID ${id}`),
       });
 
       return;
     }
 
-    const { result: updates } = req.data;
-    await saveResource(updates as SingleResource);
+    const parsed = Model.safeParse({
+      ...resource,
+      ...req.body,
+    });
+
+    if (!parsed.success) {
+      res.status(400).json({
+        success: false,
+        data: formatError(parsed.error),
+      });
+
+      return;
+    }
+
+    parsed.data.updated.push(new Date());
+    await saveResource(parsed.data);
 
     res.status(200).json({
       success: true,
-      data: updates,
+      data: parsed.data,
     });
   } catch (err) {
     //
@@ -30,4 +50,6 @@ export default async function updateOne(req: Request, res: Response) {
       data: 'Could not update resource',
     });
   }
-}
+};
+
+export default updateOne;

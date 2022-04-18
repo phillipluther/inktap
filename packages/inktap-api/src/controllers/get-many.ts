@@ -1,18 +1,18 @@
 import { Request, Response } from 'express';
-import { formatError } from '@src/utils';
+import { ZodSchema } from 'zod';
+import { ResourceCollection } from '@types';
+import { formatError, forEachFile } from '@src/utils';
+import { RESOURCE_BY_ROUTE, RESOURCE_DIRS } from '@src/constants';
 
-export default async function getMany(req: Request, res: Response) {
+const getMany = (Model: ZodSchema) => async (req: Request, res: Response) => {
   try {
-    const { data } = req;
-    let resources = data?.result || [];
+    const resources: ResourceCollection = [];
+    const resourceType = RESOURCE_BY_ROUTE[req.baseUrl];
+    const resourceDir = RESOURCE_DIRS[resourceType];
 
-    if (data && !data.isValid) {
-      res.status(400).json({
-        success: false,
-        data: formatError(data.error || 'Could not get resources'),
-      });
-      return;
-    }
+    await forEachFile(resourceDir, (json) => {
+      resources.push(JSON.parse(json));
+    });
 
     res.status(200).json({
       success: true,
@@ -25,7 +25,9 @@ export default async function getMany(req: Request, res: Response) {
     console.error(err);
     res.status(500).json({
       success: false,
-      data: 'Could not retrieve resources',
+      data: formatError('Could not retrieve resources'),
     });
   }
-}
+};
+
+export default getMany;

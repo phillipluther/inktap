@@ -1,5 +1,5 @@
 import path from 'path';
-import { Suffixes } from '@types';
+import { Resource } from '@types';
 
 export const SRC_DIR = path.join(process.cwd(), 'src');
 export const DATA_DIR =
@@ -13,4 +13,9 @@ export const RESOURCE_DIRS = {
   tags: TAGS_DIR,
   post: POSTS_DIR,
   posts: POSTS_DIR,
+};
+
+export const RESOURCE_BY_ROUTE: { [key: string]: Resource } = {
+  '/posts': 'post',
+  '/tags': 'tag',
 };

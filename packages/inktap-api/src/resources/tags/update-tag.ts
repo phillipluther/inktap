@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { getResourceById, formatError } from '@src/utils';
-import Tag from '@src/models/tag.model';
+import Tag from '@src/models/tag';
 import { Tag as T } from '@types';
 
 export default async function updateTag(req: Request, res: Response, next: NextFunction) {

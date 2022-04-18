@@ -1,5 +1,5 @@
 import parseMarkdownToResource from '../parse-markdown-to-resource';
-import Post from '@src/models/post.model';
+import Post from '@src/models/post';
 
 describe('utils/parseMarkdownToResource()', () => {
   const md = `---\ntitle: Test post\ndescription: A post for testing\ncreated: ${JSON.parse(
