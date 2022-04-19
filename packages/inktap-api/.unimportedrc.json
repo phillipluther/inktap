@@ -1,0 +1,5 @@
+{
+  "ignoreUnresolved": [],
+  "ignoreUnused": [],
+  "ignoreUnimported": ["src/__mocks__/fs.ts", "src/__mocks__/fs/promises.ts"]
+}

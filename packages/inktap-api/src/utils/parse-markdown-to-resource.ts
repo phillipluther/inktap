@@ -1,6 +1,6 @@
 import matter from 'gray-matter';
 import { Post as P } from '@types';
-import Post from '@src/models/post';
+import Post from '@src/models/post.model';
 
 export default function (md: string): P {
   const parsedMd = matter(md, { excerpt: true });

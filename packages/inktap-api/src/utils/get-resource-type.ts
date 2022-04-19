@@ -1,6 +1,6 @@
 import { Resource, SingleResource } from '@types';
-import Post from '@src/models/post';
-import Tag from '@src/models/tag';
+import Post from '@src/models/post.model';
+import Tag from '@src/models/tag.model';
 
 export default function getResourceType(resource: SingleResource): Resource | null {
   let resourceType: Resource | null = null;

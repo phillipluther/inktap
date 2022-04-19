@@ -1,8 +1,8 @@
 import express from 'express';
 import { json, urlencoded } from 'body-parser';
 import morgan from 'morgan';
-import postRoutes from './resources/posts/posts.routes';
-import tagRoutes from './resources/tags/tags.routes';
+import postRoutes from './routes/posts.routes';
+import tagRoutes from './routes/tags.routes';
 
 const options = {
   isProd: process.env.node_env === 'production',
