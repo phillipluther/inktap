@@ -7,15 +7,19 @@ export const DATA_DIR =
 
 export const POSTS_DIR = path.join(DATA_DIR, 'posts');
 export const TAGS_DIR = path.join(DATA_DIR, 'tags');
+export const AUTHORS_DIR = path.join(DATA_DIR, 'authors');
 
 export const RESOURCE_DIRS = {
   tag: TAGS_DIR,
   tags: TAGS_DIR,
   post: POSTS_DIR,
   posts: POSTS_DIR,
+  author: AUTHORS_DIR,
+  authors: AUTHORS_DIR,
 };
 
 export const RESOURCE_BY_ROUTE: { [key: string]: Resource } = {
   '/posts': 'post',
   '/tags': 'tag',
+  '/authors': 'author',
 };
