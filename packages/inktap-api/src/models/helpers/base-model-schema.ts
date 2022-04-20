@@ -7,7 +7,7 @@ const BaseModel = z.object({
   created: dateSchema.default(() => new Date()),
   updated: z.array(dateSchema).default([]),
   description: z.string().optional(),
-  metadata: z.object({}).catchall(z.any()).optional(),
+  metadata: z.object({}).catchall(z.any()).default({}),
 });
 
 export default BaseModel;

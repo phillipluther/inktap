@@ -20,10 +20,16 @@ describe('utils/saveResource()', () => {
     testPost = {
       title: 'Title',
       markdown: 'test',
+      metadata: {
+        type: 'post',
+      },
     };
 
     testTag = {
       name: 'test',
+      metadata: {
+        type: 'tag',
+      },
     };
   });
 

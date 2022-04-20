@@ -11,7 +11,7 @@ const PostModel = BaseModel.extend({
   keywords: z.array(z.string()).optional(),
   slug: z.string().optional(),
   cover: z.string().optional(),
-});
+}).describe('post');
 
 export default PostModel;
 export type PostType = z.infer<typeof PostModel>;

@@ -8,6 +8,9 @@ describe('utils/getFilepathFromResource()', () => {
     name: 'test',
     created: new Date(),
     updated: [],
+    metadata: {
+      type: 'tag',
+    },
   };
 
   const testPost = {
@@ -16,6 +19,9 @@ describe('utils/getFilepathFromResource()', () => {
     markdown: 'test',
     created: new Date(),
     updated: [],
+    metadata: {
+      type: 'post',
+    },
   };
 
   test('returns a string', () => {

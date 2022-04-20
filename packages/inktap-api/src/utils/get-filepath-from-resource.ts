@@ -1,10 +1,9 @@
 import path from 'path';
 import { DATA_DIR, TAGS_DIR, POSTS_DIR } from '@constants';
 import { SingleResource } from '@types';
-import { getResourceType } from '@src/utils';
 
 export default function getFilepathFromResource(resource: SingleResource): string {
-  const resourceType = getResourceType(resource);
+  const resourceType = resource.metadata.type;
   let dir = DATA_DIR;
 
   if (resourceType === 'post') {

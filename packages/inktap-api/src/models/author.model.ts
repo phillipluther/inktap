@@ -5,7 +5,7 @@ import socialSchema from './helpers/social-schema';
 const AuthorModel = BaseModel.extend({
   name: z.string(),
   social: z.array(socialSchema).optional(),
-});
+}).describe('author');
 
 export default AuthorModel;
 export type AuthorType = z.infer<typeof AuthorModel>;

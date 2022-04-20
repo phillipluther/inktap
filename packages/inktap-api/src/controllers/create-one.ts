@@ -15,6 +15,8 @@ const createOne = (Model: ZodSchema) => async (req: Request, res: Response) => {
       return;
     }
 
+    parsed.data.metadata.type = Model.description;
+
     await saveResource(parsed.data);
     res.status(201).json({
       success: true,
