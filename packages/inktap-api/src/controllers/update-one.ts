@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { ZodSchema } from 'zod';
 import { SingleResource } from '@types';
-import { formatError, saveResource, getResourceById } from '@src/utils';
+import { formatError, writeResourceFile, getResourceById } from '@src/utils';
 import { RESOURCE_BY_ROUTE } from '@src/constants';
 
 const updateOne = (Model: ZodSchema) => async (req: Request, res: Response) => {
@@ -34,7 +34,7 @@ const updateOne = (Model: ZodSchema) => async (req: Request, res: Response) => {
     }
 
     parsed.data.updated.push(new Date());
-    await saveResource(parsed.data);
+    await writeResourceFile(resourceType, parsed.data);
 
     res.status(200).json({
       success: true,

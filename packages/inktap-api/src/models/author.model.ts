@@ -4,6 +4,7 @@ import socialSchema from './helpers/social-schema';
 
 const AuthorModel = BaseModel.extend({
   name: z.string(),
+  bio: z.string().optional(),
   social: z.array(socialSchema).optional(),
 }).describe('author');
 

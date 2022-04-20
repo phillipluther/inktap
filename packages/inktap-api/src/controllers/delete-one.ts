@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
+import path from 'path';
 import { ZodSchema } from 'zod';
 import { rm } from 'fs/promises';
-import { getFilepathFromResource, formatError, getResourceById } from '@src/utils';
-import { RESOURCE_BY_ROUTE } from '@src/constants';
+import { formatError, getResourceById } from '@src/utils';
+import { RESOURCE_BY_ROUTE, RESOURCE_DIRS } from '@src/constants';
 import { SingleResource } from '@types';
 
 const deleteOne = (Model: ZodSchema) => async (req: Request, res: Response) => {
@@ -20,7 +21,7 @@ const deleteOne = (Model: ZodSchema) => async (req: Request, res: Response) => {
       return;
     }
 
-    const filepath = getFilepathFromResource(resource);
+    const filepath = path.join(RESOURCE_DIRS[resourceType], `${id}.json`);
     await rm(filepath);
 
     res.status(200).json({

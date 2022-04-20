@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
-import { formatError, saveResource } from '@src/utils';
+import { formatError, writeResourceFile } from '@src/utils';
+import { RESOURCE_BY_ROUTE } from '@src/constants';
 import { ZodSchema } from 'zod';
 
 const createOne = (Model: ZodSchema) => async (req: Request, res: Response) => {
   try {
     const parsed = Model.safeParse(req.body);
+    const resourceType = RESOURCE_BY_ROUTE[req.baseUrl];
 
     if (!parsed.success) {
       res.status(400).json({
@@ -15,9 +17,8 @@ const createOne = (Model: ZodSchema) => async (req: Request, res: Response) => {
       return;
     }
 
-    parsed.data.metadata.type = Model.description;
+    await writeResourceFile(resourceType, parsed.data);
 
-    await saveResource(parsed.data);
     res.status(201).json({
       success: true,
       data: parsed.data,

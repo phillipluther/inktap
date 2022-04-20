@@ -6,7 +6,7 @@ jest.mock('fs');
 jest.mock('fs/promises');
 
 describe('controllers/deleteOne()', () => {
-  const testTag = JSON.parse(JSON.stringify({ id: '123a', name: 'tag', created: new Date() }));
+  const testTag = JSON.parse(JSON.stringify({ id: '123c', name: 'tag', created: new Date() }));
 
   let controller: any;
   let req: any;

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { vol } from 'memfs';
 import createOne from '../create-one';
 
 jest.mock('fs');
@@ -6,6 +7,7 @@ jest.mock('fs/promises');
 
 describe('controllers/createOne()', () => {
   const Model = z.object({
+    id: z.string(),
     one: z.string(),
     two: z.number(),
   });
@@ -20,9 +22,11 @@ describe('controllers/createOne()', () => {
 
     req = {
       body: {
+        id: '123a',
         one: 'hey',
         two: 2,
       },
+      baseUrl: '/tags',
     };
 
     res = {
@@ -47,7 +51,12 @@ describe('controllers/createOne()', () => {
     expect(res.status).toHaveBeenCalledWith(400);
   });
 
-  test('gracefully handle server-side error', async () => {
+  test('writes a resource file', async () => {
+    await controller(req, res);
+    expect(vol.existsSync('/test/data/tags/123a.json')).toBe(true);
+  });
+
+  test('gracefully handles server-side error', async () => {
     await controller(null, res);
 
     expect(spy).toHaveBeenCalledTimes(1);
