@@ -1,5 +1,5 @@
 import { vol } from 'memfs';
-import TagModel from '@src/models/tag.model';
+import TagSchema from '@src/schemas/tag.schema';
 import { getResourceById } from '@src/utils';
 import updateOne from '../update-one';
 
@@ -23,7 +23,7 @@ describe('controllers/updateOne()', () => {
       '/test',
     );
 
-    controller = updateOne(TagModel);
+    controller = updateOne(TagSchema);
 
     req = {
       params: {

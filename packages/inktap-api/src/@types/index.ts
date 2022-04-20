@@ -1,11 +1,11 @@
 import { ZodError } from 'zod';
-import { PostType } from '@src/models/post.model';
-import { TagType } from '@src/models/tag.model';
-import { AuthorType } from '@src/models/author.model';
+import { PostType } from '@src/schemas/post.schema';
+import { TagType } from '@src/schemas/tag.schema';
+import { AuthorType } from '@src/schemas/author.schema';
 
-export { PostType as Post } from '@src/models/post.model';
-export { TagType as Tag } from '@src/models/tag.model';
-export { AuthorType as Author } from '@src/models/author.model';
+export { PostType as Post } from '@src/schemas/post.schema';
+export { TagType as Tag } from '@src/schemas/tag.schema';
+export { AuthorType as Author } from '@src/schemas/author.schema';
 
 export type RequestData = {
   isValid: boolean;

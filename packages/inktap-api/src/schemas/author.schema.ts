@@ -1,12 +1,12 @@
 import { z } from 'zod';
-import BaseModel from './helpers/base-model-schema';
+import BaseSchema from './helpers/base-schema';
 import socialSchema from './helpers/social-schema';
 
-const AuthorModel = BaseModel.extend({
+const AuthorSchema = BaseSchema.extend({
   name: z.string(),
   bio: z.string().optional(),
   social: z.array(socialSchema).optional(),
 }).describe('author');
 
-export default AuthorModel;
-export type AuthorType = z.infer<typeof AuthorModel>;
+export default AuthorSchema;
+export type AuthorType = z.infer<typeof AuthorSchema>;

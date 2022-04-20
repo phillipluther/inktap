@@ -1,5 +1,5 @@
 import { vol } from 'memfs';
-import TagModel from '@src/models/tag.model';
+import TagModel from '@src/schemas/tag.schema';
 import deleteOne from '../delete-one';
 
 jest.mock('fs');

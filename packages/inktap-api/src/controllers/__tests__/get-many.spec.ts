@@ -1,5 +1,5 @@
 import { vol } from 'memfs';
-import TagModel from '@src/models/tag.model';
+import TagSchema from '@src/schemas/tag.schema';
 import getMany from '../get-many';
 
 jest.mock('fs');
@@ -35,7 +35,7 @@ describe('controllers/getMany()', () => {
       json: jest.fn().mockImplementation(() => res),
     };
 
-    controller = getMany(TagModel);
+    controller = getMany(TagSchema);
 
     spy = jest.spyOn(console, 'error').mockImplementation(() => null);
   });

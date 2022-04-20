@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import BaseModel from './helpers/base-model-schema';
+import BaseSchema from './helpers/base-schema';
 import dateSchema from './helpers/date-schema';
 
-const PostModel = BaseModel.extend({
+const PostSchema = BaseSchema.extend({
   published: dateSchema.optional(),
   title: z.string(),
   excerpt: z.string(),
@@ -14,5 +14,5 @@ const PostModel = BaseModel.extend({
   cover: z.string().optional(),
 }).describe('post');
 
-export default PostModel;
-export type PostType = z.infer<typeof PostModel>;
+export default PostSchema;
+export type PostType = z.infer<typeof PostSchema>;
