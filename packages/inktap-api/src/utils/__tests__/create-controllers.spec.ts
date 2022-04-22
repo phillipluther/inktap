@@ -2,7 +2,7 @@ import createControllers from '../create-controllers';
 
 describe('utils/createControllers()', () => {
   let mockRouter: any;
-  let mockModel: any;
+  let mockSchema: any;
 
   beforeEach(() => {
     mockRouter = {
@@ -14,15 +14,15 @@ describe('utils/createControllers()', () => {
       delete: jest.fn().mockImplementation(() => mockRouter),
     };
 
-    mockModel = {
+    mockSchema = {
       safeParse: jest.fn(),
     };
 
-    createControllers(mockRouter, mockModel);
+    createControllers(mockRouter, mockSchema);
   });
 
   test('returns a router instance', () => {
-    expect(createControllers(mockRouter, mockModel)).toEqual(mockRouter);
+    expect(createControllers(mockRouter, mockSchema)).toEqual(mockRouter);
   });
 
   test('establishes two routes', () => {

@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import path from 'path';
-import { ZodSchema } from 'zod';
 import { rm } from 'fs/promises';
 import { formatError, getResourceById } from '@src/utils';
 import { RESOURCE_BY_ROUTE, RESOURCE_DIRS } from '@src/constants';
 import { SingleResource } from '@types';
+import { ZodSchema } from 'zod';
 
-const deleteOne = (Model: ZodSchema) => async (req: Request, res: Response) => {
+const deleteOne = (Schema?: ZodSchema) => async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const resourceType = RESOURCE_BY_ROUTE[req.baseUrl];

@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { ZodSchema } from 'zod';
 import { SingleResource } from '@types';
-import { formatError, getResourceById } from '@src/utils';
 import { RESOURCE_BY_ROUTE } from '@src/constants';
+import { formatError, getResourceById } from '@src/utils';
+import { ZodSchema } from 'zod';
 
-const getOne = (Model: ZodSchema) => async (req: Request, res: Response) => {
+const getOne = (Schema?: ZodSchema) => async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const resourceType = RESOURCE_BY_ROUTE[req.baseUrl];

@@ -3,9 +3,9 @@ import { formatError, writeResourceFile } from '@src/utils';
 import { RESOURCE_BY_ROUTE } from '@src/constants';
 import { ZodSchema } from 'zod';
 
-const createOne = (Model: ZodSchema) => async (req: Request, res: Response) => {
+const createOne = (Schema: ZodSchema) => async (req: Request, res: Response) => {
   try {
-    const parsed = Model.safeParse(req.body);
+    const parsed = Schema.safeParse(req.body);
     const resourceType = RESOURCE_BY_ROUTE[req.baseUrl];
 
     if (!parsed.success) {

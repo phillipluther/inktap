@@ -1,5 +1,5 @@
 import { vol } from 'memfs';
-import TagModel from '@src/schemas/tag.schema';
+import TagSchema from '@src/schemas/tag.schema';
 import deleteOne from '../delete-one';
 
 jest.mock('fs');
@@ -35,7 +35,7 @@ describe('controllers/deleteOne()', () => {
       json: jest.fn().mockImplementation(() => res),
     };
 
-    controller = deleteOne(TagModel);
+    controller = deleteOne(TagSchema);
 
     spy = jest.spyOn(console, 'error').mockImplementation(() => null);
   });

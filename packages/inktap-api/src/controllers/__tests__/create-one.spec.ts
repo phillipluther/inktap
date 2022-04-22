@@ -6,7 +6,7 @@ jest.mock('fs');
 jest.mock('fs/promises');
 
 describe('controllers/createOne()', () => {
-  const Model = z.object({
+  const Schema = z.object({
     id: z.string(),
     one: z.string(),
     two: z.number(),
@@ -18,7 +18,7 @@ describe('controllers/createOne()', () => {
   let spy: jest.SpyInstance;
 
   beforeEach(() => {
-    controller = createOne(Model);
+    controller = createOne(Schema);
 
     req = {
       body: {

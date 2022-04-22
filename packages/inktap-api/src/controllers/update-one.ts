@@ -4,7 +4,7 @@ import { SingleResource } from '@types';
 import { formatError, writeResourceFile, getResourceById } from '@src/utils';
 import { RESOURCE_BY_ROUTE } from '@src/constants';
 
-const updateOne = (Model: ZodSchema) => async (req: Request, res: Response) => {
+const updateOne = (Schema: ZodSchema) => async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const resourceType = RESOURCE_BY_ROUTE[req.baseUrl];
@@ -19,7 +19,7 @@ const updateOne = (Model: ZodSchema) => async (req: Request, res: Response) => {
       return;
     }
 
-    const parsed = Model.safeParse({
+    const parsed = Schema.safeParse({
       ...resource,
       ...req.body,
     });

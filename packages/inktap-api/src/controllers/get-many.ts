@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { ZodSchema } from 'zod';
 import { ResourceCollection } from '@types';
 import { formatError, forEachFile } from '@src/utils';
 import { RESOURCE_BY_ROUTE, RESOURCE_DIRS } from '@src/constants';
+import { ZodSchema } from 'zod';
 
-const getMany = (Model: ZodSchema) => async (req: Request, res: Response) => {
+const getMany = (Schema?: ZodSchema) => async (req: Request, res: Response) => {
   try {
     const resources: ResourceCollection = [];
     const resourceType = RESOURCE_BY_ROUTE[req.baseUrl];
