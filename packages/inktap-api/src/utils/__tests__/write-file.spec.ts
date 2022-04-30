@@ -7,6 +7,8 @@ describe('utils/writeFile()', () => {
   let testPost: any;
   let testTag: any;
 
+  const filepath = '/test/data/tags/123b.json';
+
   beforeEach(() => {
     vol.reset();
     vol.fromJSON(
@@ -17,32 +19,28 @@ describe('utils/writeFile()', () => {
       '/test',
     );
 
-    testPost = {
-      id: '123a',
-      title: 'Title',
-      excerpt: 'little blurb',
-      markdown: 'test',
-    };
-
     testTag = {
       id: '123b',
       name: 'test',
     };
   });
 
-  test('saves a resource as markdown', async () => {
-    await writeFile('post', testPost);
-    expect(vol.existsSync(`/test/data/posts/${testPost.id}.json`)).toBe(true);
-  });
-
-  test('saves a resource as JSON', async () => {
-    await writeFile('tag', testTag);
-    expect(vol.existsSync(`/test/data/tags/${testTag.id}.json`)).toBe(true);
+  test('writes to a file', async () => {
+    await writeFile(filepath, JSON.stringify(testTag));
+    expect(vol.existsSync(filepath)).toBe(true);
   });
 
   test('returns the created resource filepath', async () => {
-    const filepath = await writeFile('post', testPost);
-    expect(filepath).toEqual(`/test/data/posts/${testPost.id}.json`);
+    const returned = await writeFile(filepath, 'a');
+    expect(filepath).toEqual(returned);
+  });
+
+  test('creates a directory if non-existent', async () => {
+    const filepath = '/test/data/tags/deeply/nested/file.json';
+    expect(vol.existsSync(filepath)).toBe(false);
+
+    await writeFile(filepath, 'a');
+    expect(vol.existsSync(filepath)).toBe(true);
   });
 
   test('logs and throws on error', async () => {
@@ -54,7 +52,7 @@ describe('utils/writeFile()', () => {
       await writeFile(null);
     } catch (err: any) {
       expect(spy).toHaveBeenCalledTimes(1);
-      expect(err.toString()).toContain('Could not save');
+      expect(err.toString()).toContain('Could not write');
     }
   });
 });
