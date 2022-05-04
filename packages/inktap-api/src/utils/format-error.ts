@@ -1,6 +1,6 @@
 import { ZodError } from 'zod';
 
-export default (err: Error | ZodError | string): string => {
+export default (err: unknown): string => {
   let errorMessage: string;
 
   if (err instanceof ZodError) {
@@ -16,7 +16,7 @@ export default (err: Error | ZodError | string): string => {
   } else if (err instanceof Error) {
     errorMessage = err.toString();
   } else {
-    errorMessage = err;
+    errorMessage = 'Unknown error';
   }
 
   return errorMessage;

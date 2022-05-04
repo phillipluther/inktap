@@ -1,15 +1,76 @@
-import { Router } from 'express';
-import { ZodSchema } from 'zod';
-import { getOne, getMany, createOne, deleteOne, updateOne } from '@src/controllers';
+import { Request, Response } from 'express';
+import { formatError } from '@src/utils';
+import { ResourceModel } from '@types';
 
-export default function createControllers(router: Router, Schema: ZodSchema) {
-  router.route('/').get(getMany(Schema)).post(createOne(Schema));
-  router
-    .route('/:id')
-    .get(getOne(Schema))
-    .put(updateOne(Schema))
-    .patch(updateOne(Schema))
-    .delete(deleteOne(Schema));
+const createControllers = (model: ResourceModel) => ({
+  createOne(req: Request, res: Response) {
+    try {
+      const resource = model.createOne(req.body);
 
-  return router;
-}
+      res.status(201).json({
+        success: true,
+        data: resource,
+      });
+    } catch (err) {
+      res.status(400).json({
+        success: false,
+        data: formatError(err),
+      });
+    }
+  },
+
+  getOne(req: Request, res: Response) {
+    try {
+      res.status(200).json({
+        success: true,
+        data: 'got one!',
+      });
+    } catch (err) {
+      res.status(400).json({
+        success: false,
+        data: formatError(err),
+      });
+    }
+  },
+  getMany(req: Request, res: Response) {
+    try {
+      res.status(200).json({
+        success: true,
+        data: 'got many!',
+      });
+    } catch (err) {
+      res.status(400).json({
+        success: false,
+        data: formatError(err),
+      });
+    }
+  },
+  updateOne(req: Request, res: Response) {
+    try {
+      res.status(200).json({
+        success: true,
+        data: 'updated one!',
+      });
+    } catch (err) {
+      res.status(400).json({
+        success: false,
+        data: formatError(err),
+      });
+    }
+  },
+  deleteOne(req: Request, res: Response) {
+    try {
+      res.status(200).json({
+        success: true,
+        data: 'deleted one!',
+      });
+    } catch (err) {
+      res.status(400).json({
+        success: false,
+        data: formatError(err),
+      });
+    }
+  },
+});
+
+export default createControllers;

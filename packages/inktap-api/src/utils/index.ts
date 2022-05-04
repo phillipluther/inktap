@@ -1,10 +1,3 @@
 export { default as createControllers } from './create-controllers';
-export { default as createSlug } from './create-slug';
-export { default as forEachFile } from './for-each-file';
+export { default as createModel } from './create-model';
 export { default as formatError } from './format-error';
-export { default as getResourceById } from './get-resource-by-id';
-export { default as parseMarkdownToResource } from './parse-markdown-to-resource';
-export { default as readFile } from './read-file';
-export { default as updateHistory } from './update-history';
-export { default as writeFile } from './write-file';
-export { default as writeResourceFile } from './write-resource-file';

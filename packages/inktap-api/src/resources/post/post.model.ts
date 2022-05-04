@@ -1,8 +1,9 @@
 import { z } from 'zod';
-import BaseSchema from './helpers/base-schema';
-import dateSchema from './helpers/date-schema';
+import BaseSchema from '@src/utils/schema-helpers/base-schema';
+import { createModel } from '@src/utils';
+import dateSchema from '@src/utils/schema-helpers/date-schema';
 
-const PostSchema = BaseSchema.extend({
+export const PostSchema = BaseSchema.extend({
   published: dateSchema.optional(),
   title: z.string(),
   excerpt: z.string(),
@@ -12,7 +13,8 @@ const PostSchema = BaseSchema.extend({
   keywords: z.array(z.string()).optional(),
   slug: z.string().optional(),
   cover: z.string().optional(),
-}).describe('post');
+});
 
-export default PostSchema;
 export type PostType = z.infer<typeof PostSchema>;
+
+export default createModel(PostSchema);

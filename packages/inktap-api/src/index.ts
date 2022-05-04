@@ -1,14 +1,13 @@
 import express from 'express';
 import { json, urlencoded } from 'body-parser';
 import morgan from 'morgan';
-import postRoutes from './routes/posts.routes';
-import tagRoutes from './routes/tags.routes';
-import authorRoutes from './routes/authors.routes';
+import postRoutes from '@src/resources/post/post.routes';
+import tagRoutes from '@src/resources/tag/tag.routes';
 
 const options = {
   isProd: process.env.node_env === 'production',
   host: 'http://localhost',
-  port: 8001,
+  port: 8002,
 };
 
 const app = express();
@@ -20,7 +19,6 @@ app.use(morgan(options.isProd ? 'common' : 'dev'));
 
 app.use('/posts', postRoutes);
 app.use('/tags', tagRoutes);
-app.use('/authors', authorRoutes);
 
 app.use('*', (req, res) => {
   res.status(401).send({

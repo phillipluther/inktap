@@ -6,9 +6,8 @@
     "baseUrl": "src",
     "paths": {
       "@types": ["./@types"],
-      "@constants": ["./constants.ts"],
       "@src/*": ["./*"],
-      "@utils": ["./utils"]
+      "@store": ["./store"]
     },
     "typeRoots": ["./src/@types", "node_modules/@types"]
   }
