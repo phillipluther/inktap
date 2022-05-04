@@ -1,11 +1,9 @@
-import { SafeParseReturnType, ZodError, ZodParsedType } from 'zod';
-// import { PostType } from '@src/schemas/post.schema';
+import { ZodError } from 'zod';
+import { PostType } from '@src/resources/post/post.model';
 import { TagType } from '@src/resources/tag/tag.model';
-// import { AuthorType } from '@src/schemas/author.schema';
 
-// export { PostType as Post } from '@src/schemas/post.schema';
+export { PostType as Post };
 export { TagType as Tag };
-// export { AuthorType as Author } from '@src/schemas/author.schema';
 
 export type RequestData = {
   isValid: boolean;
@@ -13,15 +11,11 @@ export type RequestData = {
   error?: ZodError | string;
 };
 
-export type SingleResource = TagType;
+export type SingleResource = PostType | TagType;
 export type ResourceCollection = SingleResource[];
 
-export type Resource = 'tag'; // | 'post' | 'author';
-export type Resources = 'tags'; // | 'posts' | 'authors';
-
-export type Suffixes = {
-  [key in Resource | Resources]: string;
-};
+export type Resource = 'tag' | 'post';
+export type Resources = 'tags' | 'posts';
 
 export type ResourceModel = {
   createOne: (data: SingleResource) => SingleResource;
@@ -30,7 +24,3 @@ export type ResourceModel = {
   updateOne: (id: string, data: {}) => SingleResource | null;
   deleteOne: (id: string) => SingleResource | null;
 };
-
-export interface ResourceModelInstance extends ResourceModel {
-  [key: string]: any;
-}

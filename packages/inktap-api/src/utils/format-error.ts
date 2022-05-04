@@ -15,6 +15,8 @@ export default (err: unknown): string => {
       .join('; ');
   } else if (err instanceof Error) {
     errorMessage = err.toString();
+  } else if (typeof err === 'string') {
+    errorMessage = err;
   } else {
     errorMessage = 'Unknown error';
   }
