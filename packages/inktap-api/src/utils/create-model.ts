@@ -5,17 +5,10 @@ function createModel(modelName: string, Schema: ZodSchema): ResourceModel {
   const Model = {
     async createOne(data: z.infer<typeof Schema>) {
       const resource = Schema.parse(data);
-
-      // await store.put(modelName, {
-      //   [resource.id]: resource,
-      // });
-
       return resource;
     },
     async getOne(id: string) {
       return {} as SingleResource;
-      // const resource = store.get(modelName)[id];
-      // return resource ? resource : null;
     },
     async getMany() {
       console.log('Getting many');

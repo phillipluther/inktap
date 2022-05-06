@@ -1,5 +1,6 @@
 import { InktapStoreCollection, InktapStoreObject, InktapStoreKey, InktapSubstore } from '@types';
 import { nanoid } from 'nanoid';
+import isObject from 'isobject';
 
 export default function createSubstore(name: string, keyProp: string = 'id'): InktapSubstore {
   const substore = new Map();
@@ -32,7 +33,11 @@ export default function createSubstore(name: string, keyProp: string = 'id'): In
       return results;
     },
     create(obj: InktapStoreObject) {
-      const id = obj[keyProp] || nanoid();
+      if (!isObject(obj)) {
+        throw new Error(`Expected an object; got ${obj}`);
+      }
+
+      const id: InktapStoreKey = obj[keyProp] || nanoid();
 
       substore.set(
         id,
@@ -46,7 +51,7 @@ export default function createSubstore(name: string, keyProp: string = 'id'): In
 
       return substore.get(id);
     },
-    delete(id: string) {
+    delete(id: InktapStoreKey) {
       const obj = substore.get(id);
 
       if (obj) {
