@@ -1,0 +1,14 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "baseUrl": "src",
+    "paths": {
+      "@types": ["./@types"],
+      "@src/*": ["./*"],
+      "@store": ["./store"]
+    },
+    "typeRoots": ["./src/@types", "node_modules/@types"]
+  }
+}
