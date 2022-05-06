@@ -1,7 +1,7 @@
 {
-  "name": "inktap-api-alt",
+  "name": "inktap-api",
   "version": "0.1.0",
-  "description": "inktap-api-alt",
+  "description": "inktap-api",
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",

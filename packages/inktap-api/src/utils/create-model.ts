@@ -1,19 +1,23 @@
 import { z, ZodSchema } from 'zod';
-import { ResourceModel } from '@types';
+import { ResourceModel, SingleResource } from '@types';
 
-function createModel(Schema: ZodSchema): ResourceModel {
+function createModel(modelName: string, Schema: ZodSchema): ResourceModel {
   const Model = {
-    createOne(data: z.infer<typeof Schema>) {
+    async createOne(data: z.infer<typeof Schema>) {
       const resource = Schema.parse(data);
+
+      // await store.put(modelName, {
+      //   [resource.id]: resource,
+      // });
+
       return resource;
     },
-    getOne(id: string) {
-      console.log(`Finding by ID ${id}`);
-      return Schema.parse({
-        name: 'fake-resource',
-      });
+    async getOne(id: string) {
+      return {} as SingleResource;
+      // const resource = store.get(modelName)[id];
+      // return resource ? resource : null;
     },
-    getMany() {
+    async getMany() {
       console.log('Getting many');
       return [
         Schema.parse({ name: 'fake-resource-one' }),
@@ -21,8 +25,8 @@ function createModel(Schema: ZodSchema): ResourceModel {
         Schema.parse({ name: 'fake-resource-three' }),
       ];
     },
-    updateOne(id: string, data = {}) {
-      const resource = Model.getOne(id);
+    async updateOne(id: string, data = {}) {
+      const resource = await Model.getOne(id);
 
       if (!resource) {
         return null;
@@ -31,7 +35,7 @@ function createModel(Schema: ZodSchema): ResourceModel {
       const updatedTag = Schema.parse({ ...resource, ...data });
       return updatedTag;
     },
-    deleteOne(id: string) {
+    async deleteOne(id: string) {
       const resource = Model.getOne(id);
 
       if (!resource) {

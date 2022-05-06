@@ -17,4 +17,4 @@ export const PostSchema = BaseSchema.extend({
 
 export type PostType = z.infer<typeof PostSchema>;
 
-export default createModel(PostSchema);
+export default createModel('post', PostSchema);

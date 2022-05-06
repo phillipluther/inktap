@@ -10,4 +10,4 @@ export const TagSchema = BaseSchema.extend({
 
 export type TagType = z.infer<typeof TagSchema>;
 
-export default createModel(TagSchema);
+export default createModel('tag', TagSchema);

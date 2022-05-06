@@ -6,7 +6,7 @@ describe('utils/createModel()', () => {
   let mod: ResourceModel;
 
   beforeEach(() => {
-    mod = createModel(TagSchema);
+    mod = createModel('tag', TagSchema);
   });
 
   test('returns an object of cruds', () => {
@@ -17,8 +17,8 @@ describe('utils/createModel()', () => {
     expect(mod.deleteOne).toBeDefined();
   });
 
-  test('creates an instance', () => {
-    const instance = mod.createOne({
+  test('creates an instance', async () => {
+    const instance = await mod.createOne({
       name: 'test',
       description: 'tested',
     } as Tag);

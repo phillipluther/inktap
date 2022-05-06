@@ -106,3 +106,5 @@ dist
 # Custom Ignorations
 content
 data
+lib
+.store

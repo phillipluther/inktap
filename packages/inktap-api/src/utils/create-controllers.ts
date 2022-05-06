@@ -3,9 +3,9 @@ import { formatError } from '@src/utils';
 import { ResourceModel } from '@types';
 
 const createControllers = (model: ResourceModel) => ({
-  createOne(req: Request, res: Response) {
+  async createOne(req: Request, res: Response) {
     try {
-      const resource = model.createOne(req.body);
+      const resource = await model.createOne(req.body);
 
       res.status(201).json({
         success: true,
@@ -19,11 +19,22 @@ const createControllers = (model: ResourceModel) => ({
     }
   },
 
-  getOne(req: Request, res: Response) {
+  async getOne(req: Request, res: Response) {
     try {
-      res.status(200).json({
-        success: true,
-        data: 'got one!',
+      const resource = model.getOne(req.params.id);
+
+      let error;
+      let status = 200;
+      let success = !!resource ? resource : false;
+
+      if (!success) {
+        status = 404;
+        error = formatError(`Could not find resource with ID ${req.params.id}`);
+      }
+
+      res.status(status).json({
+        success,
+        data: success ? resource : error,
       });
     } catch (err) {
       res.status(400).json({
@@ -32,7 +43,7 @@ const createControllers = (model: ResourceModel) => ({
       });
     }
   },
-  getMany(req: Request, res: Response) {
+  async getMany(req: Request, res: Response) {
     try {
       res.status(200).json({
         success: true,
@@ -45,7 +56,7 @@ const createControllers = (model: ResourceModel) => ({
       });
     }
   },
-  updateOne(req: Request, res: Response) {
+  async updateOne(req: Request, res: Response) {
     try {
       res.status(200).json({
         success: true,
@@ -58,7 +69,7 @@ const createControllers = (model: ResourceModel) => ({
       });
     }
   },
-  deleteOne(req: Request, res: Response) {
+  async deleteOne(req: Request, res: Response) {
     try {
       res.status(200).json({
         success: true,

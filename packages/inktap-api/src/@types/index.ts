@@ -18,9 +18,9 @@ export type Resource = 'tag' | 'post';
 export type Resources = 'tags' | 'posts';
 
 export type ResourceModel = {
-  createOne: (data: SingleResource) => SingleResource;
-  getOne: (id: string) => SingleResource | null;
-  getMany: (params?: {}) => ResourceCollection;
-  updateOne: (id: string, data: {}) => SingleResource | null;
-  deleteOne: (id: string) => SingleResource | null;
+  createOne: (data: SingleResource) => Promise<SingleResource>;
+  getOne: (id: string) => Promise<SingleResource | null>;
+  getMany: (params?: {}) => Promise<ResourceCollection>;
+  updateOne: (id: string, data: {}) => Promise<SingleResource | null>;
+  deleteOne: (id: string) => Promise<SingleResource | null>;
 };
