@@ -42,6 +42,17 @@ describe('createSubstore()', () => {
     expect(substore.get('123')).toEqual(obj);
   });
 
+  test('throws if creating non-objects', () => {
+    expect.assertions(1);
+
+    try {
+      // @ts-ignore
+      substore.create(99);
+    } catch (err) {
+      expect(err + '').toContain('Expected an object');
+    }
+  });
+
   test('gets a single item', () => {
     expect(substore.get(thing2id)).toEqual({
       thing: 2,

@@ -8,3 +8,11 @@ export type InktapSubstore = {
   create: (obj: InktapStoreObject) => InktapStoreObject;
   delete: (id: InktapStoreKey) => InktapStoreObject;
 };
+
+export interface InktapStoreMethods {
+  createSubstore: (name: string, keyProp?: string) => InktapSubstore;
+}
+
+export type InktapStore = InktapStoreMethods & {
+  [key: InktapStoreKey]: InktapSubstore;
+};
