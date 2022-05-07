@@ -21,11 +21,11 @@ const createControllers = (model: ResourceModel) => ({
 
   async getOne(req: Request, res: Response) {
     try {
-      const resource = model.getOne(req.params.id);
+      const resource = await model.getOne(req.params.id);
 
       let error;
       let status = 200;
-      let success = !!resource ? resource : false;
+      let success = !!resource;
 
       if (!success) {
         status = 404;
@@ -45,9 +45,11 @@ const createControllers = (model: ResourceModel) => ({
   },
   async getMany(req: Request, res: Response) {
     try {
+      const collection = await model.getMany(req.params);
+
       res.status(200).json({
         success: true,
-        data: 'got many!',
+        data: collection,
       });
     } catch (err) {
       res.status(400).json({
@@ -58,9 +60,12 @@ const createControllers = (model: ResourceModel) => ({
   },
   async updateOne(req: Request, res: Response) {
     try {
-      res.status(200).json({
-        success: true,
-        data: 'updated one!',
+      const updated = await model.updateOne(req.params.id, req.body);
+      const success = !!updated;
+
+      res.status(success ? 200 : 404).json({
+        success,
+        data: updated || formatError(`Could not find resource with ID ${req.params.id}`),
       });
     } catch (err) {
       res.status(400).json({
@@ -71,9 +76,12 @@ const createControllers = (model: ResourceModel) => ({
   },
   async deleteOne(req: Request, res: Response) {
     try {
-      res.status(200).json({
-        success: true,
-        data: 'deleted one!',
+      const deleted = await model.deleteOne(req.params.id);
+      const success = !!deleted;
+
+      res.status(success ? 200 : 404).json({
+        success,
+        data: deleted || formatError(`Could not find resource with ID ${req.params.id}`),
       });
     } catch (err) {
       res.status(400).json({

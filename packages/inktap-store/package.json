@@ -2,9 +2,9 @@
   "name": "inktap-store",
   "version": "0.1.0",
   "description": "",
-  "main": "lib/index.js",
-  "module": "lib/index.esm.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
     "build": "rm -rf dist && rollup -c",
@@ -13,6 +13,10 @@
   "keywords": [],
   "author": "Phillip Luther <dev@phillipluther.com>",
   "license": "MIT",
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@tsconfig/node16": "^1.0.2",

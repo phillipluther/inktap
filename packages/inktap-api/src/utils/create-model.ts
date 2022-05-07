@@ -1,22 +1,27 @@
 import { z, ZodSchema } from 'zod';
 import { ResourceModel, SingleResource } from '@types';
+import pluralize from 'pluralize';
+import store from '@src/store';
 
 function createModel(modelName: string, Schema: ZodSchema): ResourceModel {
+  const collectionName = pluralize(modelName);
+
+  if (!store[collectionName]) {
+    store.createSubstore(collectionName);
+  }
+
+  const collection = store[collectionName];
+
   const Model = {
     async createOne(data: z.infer<typeof Schema>) {
       const resource = Schema.parse(data);
-      return resource;
+      return collection.create(resource);
     },
     async getOne(id: string) {
-      return {} as SingleResource;
+      return collection.get(id);
     },
-    async getMany() {
-      console.log('Getting many');
-      return [
-        Schema.parse({ name: 'fake-resource-one' }),
-        Schema.parse({ name: 'fake-resource-two' }),
-        Schema.parse({ name: 'fake-resource-three' }),
-      ];
+    async getMany(attributes = {}) {
+      return collection.find(attributes);
     },
     async updateOne(id: string, data = {}) {
       const resource = await Model.getOne(id);
@@ -25,18 +30,10 @@ function createModel(modelName: string, Schema: ZodSchema): ResourceModel {
         return null;
       }
 
-      const updatedTag = Schema.parse({ ...resource, ...data });
-      return updatedTag;
+      return collection.create(Schema.parse({ ...resource, ...data }), 'id');
     },
     async deleteOne(id: string) {
-      const resource = Model.getOne(id);
-
-      if (!resource) {
-        return null;
-      }
-
-      console.log(`Deleting tag with ID ${id}`);
-      return resource;
+      return collection.delete(id);
     },
   };
 
