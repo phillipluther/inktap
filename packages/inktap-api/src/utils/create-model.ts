@@ -15,7 +15,7 @@ function createModel(modelName: string, Schema: ZodSchema): ResourceModel {
   const Model = {
     async createOne(data: z.infer<typeof Schema>) {
       const resource = Schema.parse(data);
-      return collection.create(resource);
+      return collection.save(resource);
     },
     async getOne(id: string) {
       return collection.get(id);
@@ -25,12 +25,14 @@ function createModel(modelName: string, Schema: ZodSchema): ResourceModel {
     },
     async updateOne(id: string, data = {}) {
       const resource = await Model.getOne(id);
-
       if (!resource) {
         return null;
       }
 
-      return collection.create(Schema.parse({ ...resource, ...data }), 'id');
+      // can't override updates or ID!
+      const updated = resource.updated.concat(new Date());
+
+      return collection.save(Schema.parse({ ...resource, ...data, updated, id }), 'id');
     },
     async deleteOne(id: string) {
       return collection.delete(id);
