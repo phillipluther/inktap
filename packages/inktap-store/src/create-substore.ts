@@ -32,7 +32,7 @@ export default function createSubstore(name: string, keyProp: string = 'id'): In
 
       return results;
     },
-    create(obj: InktapStoreObject) {
+    save(obj: InktapStoreObject) {
       if (!isObject(obj)) {
         throw new Error(`Expected an object; got ${obj}`);
       }

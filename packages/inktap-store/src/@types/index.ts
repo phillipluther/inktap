@@ -5,7 +5,7 @@ export type InktapStoreCollection = InktapStoreObject[];
 export type InktapSubstore = {
   get: (id: InktapStoreKey) => InktapStoreObject;
   find: (attributes: InktapStoreObject) => InktapStoreCollection;
-  create: (obj: InktapStoreObject) => InktapStoreObject;
+  save: (obj: InktapStoreObject) => InktapStoreObject;
   delete: (id: InktapStoreKey) => InktapStoreObject;
 };
 

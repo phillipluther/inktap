@@ -1,6 +1,5 @@
 import { InktapStore, InktapStoreObject } from '@types';
 import createSubstore from './create-substore';
-import isObject from 'isobject';
 
 export default function createStore(data: { [key: string]: InktapStoreObject[] } = {}) {
   const store: InktapStore = Object.create({
@@ -28,7 +27,7 @@ export default function createStore(data: { [key: string]: InktapStoreObject[] }
     store[key] = createSubstore(key);
 
     data[key].forEach((obj) => {
-      store[key].create(obj);
+      store[key].save(obj);
     });
   });
 

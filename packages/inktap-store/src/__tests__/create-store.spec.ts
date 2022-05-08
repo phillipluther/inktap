@@ -6,7 +6,7 @@ describe('createStore()', () => {
     const expectedMethods: { [key: string]: boolean } = {
       get: false,
       find: false,
-      create: false,
+      save: false,
       delete: false,
     };
 
@@ -14,9 +14,9 @@ describe('createStore()', () => {
       expectedMethods[key] = true;
     });
 
-    const { get: canGet, find: canFind, create: canCreate, delete: canDelete } = expectedMethods;
+    const { get: canGet, find: canFind, save: canSave, delete: canDelete } = expectedMethods;
 
-    return canGet && canFind && canCreate && canDelete;
+    return canGet && canFind && canSave && canDelete;
   }
 
   let store: InktapStore;
@@ -33,10 +33,6 @@ describe('createStore()', () => {
   test('can create new substores', () => {
     expect(isSubstore(store.createSubstore('tags'))).toBe(true);
   });
-
-  // test('returns created substores for chaining', () => {
-  //   expect(store.createSubstore('tags').get).toBeDefined();
-  // });
 
   test('builds a store of substores from data', () => {
     store = createStore(mockData);

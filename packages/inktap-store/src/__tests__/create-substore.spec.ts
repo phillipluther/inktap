@@ -8,10 +8,10 @@ describe('createSubstore()', () => {
   beforeEach(() => {
     substore = createSubstore('substore');
 
-    substore.create({ thing: 1 });
-    substore.create({ thing: 1 });
-    thing2id = substore.create({ thing: 2 }).id;
-    substore.create({ thing: 3 });
+    substore.save({ thing: 1 });
+    substore.save({ thing: 1 });
+    thing2id = substore.save({ thing: 2 }).id;
+    substore.save({ thing: 3 });
   });
 
   test('exposes methods for managing a collection of objects', () => {
@@ -22,21 +22,21 @@ describe('createSubstore()', () => {
     expect(substore.find).toBeDefined();
     expect(typeof substore.find).toEqual('function');
 
-    expect(substore.create).toBeDefined();
-    expect(typeof substore.create).toEqual('function');
+    expect(substore.save).toBeDefined();
+    expect(typeof substore.save).toEqual('function');
 
     expect(substore.delete).toBeDefined();
     expect(typeof substore.delete).toEqual('function');
   });
 
   test('on create, assigns an ID if missing', () => {
-    const { id } = substore.create({ thing: 2 });
+    const { id } = substore.save({ thing: 2 });
     expect(id).toBeDefined();
   });
 
   test('uses a specified key on creation', () => {
     substore = createSubstore('test', 'key');
-    const obj = substore.create({ thing: 2, key: '123' });
+    const obj = substore.save({ thing: 2, key: '123' });
 
     expect(obj.id).toBeUndefined();
     expect(substore.get('123')).toEqual(obj);
@@ -47,7 +47,7 @@ describe('createSubstore()', () => {
 
     try {
       // @ts-ignore
-      substore.create(99);
+      substore.save(99);
     } catch (err) {
       expect(err + '').toContain('Expected an object');
     }
@@ -73,9 +73,9 @@ describe('createSubstore()', () => {
   });
 
   test('deletes an item from the store', () => {
-    const { id } = substore.create({ thing: 1 });
-    substore.create({ thing: 2 });
-    substore.create({ thing: 3 });
+    const { id } = substore.save({ thing: 1 });
+    substore.save({ thing: 2 });
+    substore.save({ thing: 3 });
 
     substore.delete(id);
 
@@ -96,7 +96,7 @@ describe('createSubstore()', () => {
   });
 
   test('updates an item like a normal object', () => {
-    const obj = substore.create({ thing: 1 });
+    const obj = substore.save({ thing: 1 });
     obj.thing = 2;
     obj.anotherProp = true;
 
