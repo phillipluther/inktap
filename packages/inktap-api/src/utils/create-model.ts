@@ -1,5 +1,5 @@
 import { z, ZodSchema } from 'zod';
-import { ResourceModel, SingleResource } from '@types';
+import { ResourceModel } from '@types';
 import pluralize from 'pluralize';
 import store from '@src/store';
 
