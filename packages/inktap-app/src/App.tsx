@@ -1,6 +1,5 @@
 import React from 'react';
-import { Editor } from 'inktap-editor';
-import 'inktap-editor/dist/index.css';
+import Editor from './components/editor';
 
 const App = () => {
   return <Editor />;
