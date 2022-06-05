@@ -1,7 +1,7 @@
 {
-  "name": "inktap-store",
-  "version": "0.1.0",
-  "description": "",
+  "name": "inktap-object-store",
+  "version": "0.0.0",
+  "description": "Overly simple in-memory object storage",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
