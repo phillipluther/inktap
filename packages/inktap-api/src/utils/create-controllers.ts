@@ -21,10 +21,10 @@ const createControllers = (model: ResourceModel) => ({
   async getOne(req: Request, res: Response) {
     try {
       const resource = await model.getOne(req.params.id);
+      const success = !!resource;
 
       let error;
       let status = 200;
-      let success = !!resource;
 
       if (!success) {
         status = 404;

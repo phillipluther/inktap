@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "lint": "eslint src/**",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
@@ -26,6 +27,9 @@
     "@types/jest": "^27.4.1",
     "@types/morgan": "^1.9.3",
     "@types/pluralize": "^0.0.29",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint": "^8.17.0",
     "jest": "^27.5.1",
     "memfs": "^3.4.1",
     "ts-jest": "^27.1.4",

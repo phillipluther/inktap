@@ -1,9 +1,10 @@
-import { ResourceModel, SingleResource, Tag } from '@types';
+import { ResourceModel, Tag } from '@types';
 import { TagSchema } from '@src/resources/tag/tag.model';
 import createModel from '../create-model';
 
 describe('utils/createModel()', () => {
   let mod: ResourceModel;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let instance: { [key: string]: any };
 
   beforeEach(async () => {
@@ -18,7 +19,7 @@ describe('utils/createModel()', () => {
   afterEach(async () => {
     const allResources = await mod.getMany();
 
-    for (let resource of allResources) {
+    for (const resource of allResources) {
       await mod.deleteOne(resource.id);
     }
   });

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Tag, { TagSchema } from '@src/resources/tag/tag.model';
 import store from '@src/store';
 import createControllers from '../create-controllers';
@@ -9,17 +11,7 @@ describe('utils/createControllers()', () => {
   };
   let controllers: { [key: string]: any };
   let req: { [key: string]: any };
-  let res: { [key: string]: any } = {
-    status: jest.fn().mockImplementation(() => res),
-    json: jest.fn().mockImplementation(({ success, data }) => {
-      response = {
-        success,
-        data,
-      };
-
-      return res;
-    }),
-  };
+  let res: { [key: string]: any };
 
   let tagIdOne: string;
   let tagIdTwo: string;
@@ -34,6 +26,18 @@ describe('utils/createControllers()', () => {
         name: 'tag',
         description: 'description',
       },
+    };
+
+    res = {
+      status: jest.fn().mockImplementation(() => res),
+      json: jest.fn().mockImplementation(({ success, data }) => {
+        response = {
+          success,
+          data,
+        };
+
+        return res;
+      }),
     };
 
     tagIdOne = store.tags.save(TagSchema.parse({ name: 'demo-tag-one' })).id;
