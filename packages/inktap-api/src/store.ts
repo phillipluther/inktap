@@ -1,4 +1,4 @@
-import { createStore } from 'inktap-store';
+import { createStore } from 'inktap-object-store';
 
 const store = createStore();
 export default store;

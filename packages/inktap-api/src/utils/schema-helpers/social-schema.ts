@@ -4,7 +4,7 @@ const socialSchema = z.object({
   name: z.string(),
   description: z.string(),
   url: z.string(),
-  user: z.string(),
+  username: z.string(),
 });
 
 export default socialSchema;

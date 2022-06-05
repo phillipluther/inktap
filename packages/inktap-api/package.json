@@ -1,13 +1,12 @@
 {
   "name": "inktap-api",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "inktap-api",
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
     "test": "jest",
-    "test:coverage": "jest --coverage",
-    "deadfiles": "npx unimported"
+    "test:coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "Phillip Luther <dev@phillipluther.com>",
@@ -15,7 +14,7 @@
   "dependencies": {
     "body-parser": "^1.20.0",
     "express": "^4.17.3",
-    "inktap-store": "0.0.0",
+    "inktap-object-store": "0.0.0",
     "morgan": "^1.10.0",
     "nanoid": "^3.3.2",
     "pluralize": "^8.0.0",

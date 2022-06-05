@@ -1,3 +1,3 @@
-# inktap
+# inktap-api
 
 ... wip ...
