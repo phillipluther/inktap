@@ -2,7 +2,7 @@ import Tag, { TagSchema } from '@src/resources/tag/tag.model';
 import store from '@src/store';
 import createControllers from '../create-controllers';
 
-describe('utils/createModel()', () => {
+describe('utils/createControllers()', () => {
   let response: {
     success: boolean;
     data: { [key: string]: any };
@@ -58,7 +58,7 @@ describe('utils/createModel()', () => {
     expect(controllers.deleteOne).toBeDefined();
   });
 
-  test('creates and responds with a 201', async () => {
+  test('createOne() creates a resource and responds with a 201', async () => {
     await controllers.createOne(req, res);
 
     expect(res.status).toHaveBeenCalledWith(201);
@@ -68,7 +68,7 @@ describe('utils/createModel()', () => {
     deleteId = response.data.id;
   });
 
-  test('responds with a 400 and error on failed creation', async () => {
+  test('createOne() responds with a 400 and error on failed creation', async () => {
     delete req.body.name;
 
     await controllers.createOne(req, res);
@@ -84,6 +84,15 @@ describe('utils/createModel()', () => {
     expect(res.status).toHaveBeenCalledWith(200);
     expect(response.success).toBe(true);
     expect(response.data).toHaveLength(2);
+  });
+
+  test('getMany() responds with a 400 on bad request', async () => {
+    req.params = null; // wildly malformed request!
+
+    await controllers.getMany(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(response.success).toBe(false);
   });
 
   test('getOne() gets a resource by ID with a 200', async () => {
@@ -104,6 +113,16 @@ describe('utils/createModel()', () => {
     await controllers.getOne(req, res);
 
     expect(res.status).toHaveBeenCalledWith(404);
+    expect(response.success).toBe(false);
+  });
+
+  test('getOne() responds with a 400 and error on bad request', async () => {
+    delete req.body;
+    delete req.params;
+
+    await controllers.getOne(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
     expect(response.success).toBe(false);
   });
 
@@ -128,6 +147,15 @@ describe('utils/createModel()', () => {
     expect(response.success).toBe(false);
   });
 
+  test('updateOne() responds with a 400 on bad request', async () => {
+    delete req.params;
+
+    await controllers.updateOne(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(response.success).toBe(false);
+  });
+
   test('deleteOne() responds with a 200 and the deleted resource', async () => {
     req.params.id = tagIdTwo;
 
@@ -144,6 +172,15 @@ describe('utils/createModel()', () => {
     await controllers.deleteOne(req, res);
 
     expect(res.status).toHaveBeenCalledWith(404);
+    expect(response.success).toBe(false);
+  });
+
+  test('deleteOne() responds with a 400 on bad request', async () => {
+    delete req.params;
+
+    await controllers.deleteOne(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
     expect(response.success).toBe(false);
   });
 });

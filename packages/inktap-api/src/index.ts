@@ -23,8 +23,9 @@ app.use('/tags', tagRoutes);
 app.use('/authors', authorRoutes);
 
 app.use('*', (req, res) => {
-  res.status(401).send({
-    message: 'Method not supported',
+  res.status(401).json({
+    success: false,
+    data: 'Method not supported',
   });
 });
 

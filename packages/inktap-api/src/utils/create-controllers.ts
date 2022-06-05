@@ -18,7 +18,6 @@ const createControllers = (model: ResourceModel) => ({
       });
     }
   },
-
   async getOne(req: Request, res: Response) {
     try {
       const resource = await model.getOne(req.params.id);
