@@ -3,7 +3,7 @@ import { createModel, hash } from '@src/utils';
 import BaseSchema from '@src/utils/schema-helpers/base-schema';
 import socialSchema from '@src/utils/schema-helpers/social-schema';
 
-export const AuthorSchema = BaseSchema.extend({
+export const UserSchema = BaseSchema.extend({
   username: z.string(),
   password: z.string().transform(hash),
   name: z.string().optional(),
@@ -12,6 +12,6 @@ export const AuthorSchema = BaseSchema.extend({
   social: z.array(socialSchema).optional(),
 });
 
-export type PostType = z.infer<typeof AuthorSchema>;
+export type PostType = z.infer<typeof UserSchema>;
 
-export default createModel('author', AuthorSchema);
+export default createModel('user', UserSchema);
