@@ -4,7 +4,7 @@ import BaseSchema from '@src/utils/schema-helpers/base-schema';
 import socialSchema from '@src/utils/schema-helpers/social-schema';
 
 export const UserSchema = BaseSchema.extend({
-  username: z.string(),
+  email: z.string(),
   password: z.string().transform(hash),
   name: z.string().optional(),
   preferredName: z.string().optional(),
