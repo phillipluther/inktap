@@ -16,15 +16,21 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan(options.isProd ? 'common' : 'dev'));
 
-createRoutes(app).then(() => {
-  app.use('*', (req, res) => {
+createRoutes(app).then((routedApp) => {
+  if (!routedApp) {
+    console.error('[inktap-api]', 'Failed to start Inktap; check the debugging logs above');
+    return;
+  }
+
+  // catch-all route for anything not handled above
+  routedApp.use('*', (req, res) => {
     res.status(401).json({
       success: false,
       data: 'Method not supported',
     });
   });
 
-  app.listen(options.port, () => {
+  routedApp.listen(options.port, () => {
     console.log(`[inktap-api] Listening at ${options.host}:${options.port}`);
   });
 });

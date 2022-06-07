@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import Tag, { TagSchema } from '@src/resources/tag/tag.model';
+import Tag, { TagSchema } from '@src/resources/tag.model';
 import store from '@src/store';
 import createControllers from '../create-controllers';
 

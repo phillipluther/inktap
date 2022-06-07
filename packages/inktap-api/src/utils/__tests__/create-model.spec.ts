@@ -1,5 +1,5 @@
 import { ResourceModel, Tag } from '@types';
-import { TagSchema } from '@src/resources/tag/tag.model';
+import { TagSchema } from '@src/resources/tag.model';
 import createModel from '../create-model';
 
 describe('utils/createModel()', () => {

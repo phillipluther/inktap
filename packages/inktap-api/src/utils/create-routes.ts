@@ -4,7 +4,7 @@ import path from 'path';
 import pluralize from 'pluralize';
 import createControllers from './create-controllers';
 
-export default async function (app: Express) {
+export default async function (app: Express): Promise<Express | null> {
   try {
     const resourceDir = path.resolve('src/resources');
     const modelSuffix = '.model.ts';
@@ -30,7 +30,10 @@ export default async function (app: Express) {
 
       app.use(endpoint, router);
     }
+
+    return app;
   } catch (err) {
     console.error(err);
+    return null;
   }
 }
