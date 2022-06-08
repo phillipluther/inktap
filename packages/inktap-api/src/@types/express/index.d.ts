@@ -1,9 +1,8 @@
-// import { Express } from 'express-serve-static-core';
-import { RequestData } from '@types';
-// import { ZodError } from 'zod';
+import { RequestData, User } from '@types';
 
 declare module 'express-serve-static-core' {
   interface Request {
     data?: RequestData;
+    user?: User;
   }
 }

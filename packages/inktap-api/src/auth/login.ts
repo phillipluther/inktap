@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import User from '../resources/user.model';
+import User, { UserType } from '../resources/user.model';
 import { createToken } from '../utils';
 
 export default async (req: Request, res: Response) => {
@@ -16,9 +16,7 @@ export default async (req: Request, res: Response) => {
     }
 
     const userMatch = await User.getMany({ email });
-    const user = userMatch.length > 0 ? userMatch[0] : null;
-
-    console.log('USER', userMatch);
+    const user = userMatch.length > 0 ? (userMatch[0] as UserType) : null;
 
     const invalidResponse = {
       success: false,

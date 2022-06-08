@@ -1,9 +1,11 @@
 import { ZodError } from 'zod';
-import { PostType } from '@src/resources/post/post.model';
-import { TagType } from '@src/resources/tag/tag.model';
+import { PostType } from '@src/resources/post.model';
+import { TagType } from '@src/resources/tag.model';
+import { UserType } from '@src/resources/user.model';
 
 export { PostType as Post };
 export { TagType as Tag };
+export { UserType as User };
 
 export type RequestData = {
   isValid: boolean;
@@ -11,11 +13,11 @@ export type RequestData = {
   error?: ZodError | string;
 };
 
-export type SingleResource = PostType | TagType;
+export type SingleResource = PostType | TagType | UserType;
 export type ResourceCollection = SingleResource[];
 
-export type Resource = 'tag' | 'post';
-export type Resources = 'tags' | 'posts';
+export type Resource = 'tag' | 'post' | 'user';
+export type Resources = 'tags' | 'posts' | 'user';
 
 export type GenericObject = { [key: string]: unknown };
 

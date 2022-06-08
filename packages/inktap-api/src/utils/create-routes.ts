@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import pluralize from 'pluralize';
 import createControllers from './create-controllers';
+import { authCheck } from '../auth';
 
 export default async function (app: Express): Promise<Express | null> {
   try {
@@ -20,6 +21,7 @@ export default async function (app: Express): Promise<Express | null> {
 
       console.log('[inktap-api]', `Creating CRUD routes for ${endpoint}`);
 
+      router.use('/', authCheck);
       router.route('/').post(controllers.createOne).get(controllers.getMany);
       router
         .route('/:id')

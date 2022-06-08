@@ -12,6 +12,6 @@ export const UserSchema = BaseSchema.extend({
   social: z.array(socialSchema).optional(),
 });
 
-export type PostType = z.infer<typeof UserSchema>;
+export type UserType = z.infer<typeof UserSchema>;
 
 export default createModel('user', UserSchema);

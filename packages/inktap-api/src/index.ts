@@ -2,7 +2,7 @@ import express from 'express';
 import { json, urlencoded } from 'body-parser';
 import morgan from 'morgan';
 import { createRoutes } from '@src/utils';
-import auth from '@src/auth';
+import { authRoute } from '@src/auth';
 
 const options = {
   isProd: process.env.node_env === 'production',
@@ -17,7 +17,7 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 app.use(morgan(options.isProd ? 'common' : 'dev'));
 
-app.use('/login', auth);
+app.use('/login', authRoute);
 
 createRoutes(app).then((routedApp) => {
   if (!routedApp) {
