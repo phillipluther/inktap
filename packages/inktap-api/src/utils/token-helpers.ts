@@ -6,4 +6,6 @@ export const createToken = (claims = {}) => {
   return jwt.sign(claims, secret);
 };
 
-export const verifyToken = (token: string) => jwt.verify(token, secret);
+export const verifyToken = (token: string) => {
+  return jwt.verify(token, secret);
+};

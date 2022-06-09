@@ -1,23 +1,24 @@
 import { Request, Response, NextFunction } from 'express';
 import { verifyToken } from '@src/utils';
-import User, { UserType } from '../resources/user.model';
+import User, { UserType } from '../users/user.model';
 
 const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const token = req.headers.authorization;
+    const bearer = req.headers.authorization;
 
-    if (!token) {
+    if (!bearer || !bearer.startsWith('Bearer ')) {
       res.status(401).json({
         success: false,
         data: 'Authentication required',
       });
-
       return;
     }
 
-    const userId = verifyToken(token);
+    // TODO: probably some regex wizardry to do this better?
+    const token = bearer.split('Bearer ')[1].trim();
+    const decodedToken = verifyToken(token);
 
-    if (!userId) {
+    if (typeof decodedToken === 'string' || !decodedToken.id) {
       res.status(401).json({
         success: false,
         data: 'Invalid token',
@@ -25,13 +26,14 @@ const authMiddleware = async (req: Request, res: Response, next: NextFunction) =
       return;
     }
 
-    const user = await User.getOne(userId.toString());
+    const user = await User.getOne(decodedToken.id);
 
     if (!user) {
       res.status(401).json({
         success: false,
         data: 'Invalid user token',
       });
+      return;
     }
 
     req.user = user as UserType;

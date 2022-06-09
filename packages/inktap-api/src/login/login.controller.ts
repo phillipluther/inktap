@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import User, { UserType } from '../resources/user.model';
+import User, { UserType } from '../users/user.model';
 import { createToken } from '../utils';
 
 export default async (req: Request, res: Response) => {

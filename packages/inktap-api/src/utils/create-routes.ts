@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import pluralize from 'pluralize';
 import createControllers from './create-controllers';
-import { authCheck } from '../auth';
+import { authCheck } from '../login';
 
 export default async function (app: Express): Promise<Express | null> {
   try {
